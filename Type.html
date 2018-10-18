@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>Type</title><link rel="stylesheet" href="Agda.css"></head><body><pre>\begin{code}
+<a id="14" class="Keyword">module</a> <a id="21" href="Type.html" class="Module">Type</a> <a id="26" class="Keyword">where</a>
+\end{code}<a id="42" class="Comment">
+
+## Fixity declarations
+
+To begin, we get all our infix declarations out of the way.
+We list separately operators for judgements, types, and terms.
+</a>\begin{code}
+<a id="204" class="Keyword">infix</a>  <a id="211" class="Number">4</a> <a id="213" href="Type.html#811" class="Datatype Operator">_∋⋆_</a>
+<a id="218" class="Keyword">infix</a>  <a id="225" class="Number">4</a> <a id="227" href="Type.html#1210" class="Datatype Operator">_⊢⋆_</a>
+<a id="232" class="Keyword">infixl</a> <a id="239" class="Number">5</a> <a id="241" href="Type.html#645" class="InductiveConstructor Operator">_,⋆_</a>
+
+<a id="247" class="Keyword">infix</a>  <a id="254" class="Number">6</a> <a id="256" href="Type.html#1300" class="InductiveConstructor">Π</a>
+<a id="258" class="Keyword">infixr</a> <a id="265" class="Number">7</a> <a id="267" href="Type.html#418" class="InductiveConstructor Operator">_⇒_</a>
+
+<a id="272" class="Keyword">infix</a>  <a id="279" class="Number">5</a> <a id="281" href="Type.html#1431" class="InductiveConstructor">ƛ</a>
+<a id="283" class="Keyword">infixl</a> <a id="290" class="Number">7</a> <a id="292" href="Type.html#1503" class="InductiveConstructor Operator">_·_</a>
+<a id="296" class="Keyword">infix</a>  <a id="303" class="Number">9</a> <a id="305" href="Type.html#898" class="InductiveConstructor">S</a>
+\end{code}<a id="317" class="Comment">
+
+## Kinds
+
+The only kind is `*`, the kind of types.
+</a>\begin{code}
+<a id="383" class="Keyword">data</a> <a id="Kind"></a><a id="388" href="Type.html#388" class="Datatype">Kind</a> <a id="393" class="Symbol">:</a> <a id="395" class="PrimitiveType">Set</a> <a id="399" class="Keyword">where</a>
+  <a id="Kind.*"></a><a id="407" href="Type.html#407" class="InductiveConstructor">*</a> <a id="409" class="Symbol">:</a> <a id="411" href="Type.html#388" class="Datatype">Kind</a>
+  <a id="Kind._⇒_"></a><a id="418" href="Type.html#418" class="InductiveConstructor Operator">_⇒_</a> <a id="422" class="Symbol">:</a> <a id="424" href="Type.html#388" class="Datatype">Kind</a> <a id="429" class="Symbol">→</a> <a id="431" href="Type.html#388" class="Datatype">Kind</a> <a id="436" class="Symbol">→</a> <a id="438" href="Type.html#388" class="Datatype">Kind</a>
+\end{code}<a id="453" class="Comment">
+Let `J`, `K` range over kinds.
+
+## Type contexts
+
+A type context is either empty or extends a type
+context by a type variable of a given kind.
+</a>\begin{code}
+<a id="610" class="Keyword">data</a> <a id="Ctx⋆"></a><a id="615" href="Type.html#615" class="Datatype">Ctx⋆</a> <a id="620" class="Symbol">:</a> <a id="622" class="PrimitiveType">Set</a> <a id="626" class="Keyword">where</a>
+  <a id="Ctx⋆.∅"></a><a id="634" href="Type.html#634" class="InductiveConstructor">∅</a> <a id="636" class="Symbol">:</a> <a id="638" href="Type.html#615" class="Datatype">Ctx⋆</a>
+  <a id="Ctx⋆._,⋆_"></a><a id="645" href="Type.html#645" class="InductiveConstructor Operator">_,⋆_</a> <a id="650" class="Symbol">:</a> <a id="652" href="Type.html#615" class="Datatype">Ctx⋆</a> <a id="657" class="Symbol">→</a> <a id="659" href="Type.html#388" class="Datatype">Kind</a> <a id="664" class="Symbol">→</a> <a id="666" href="Type.html#615" class="Datatype">Ctx⋆</a>
+\end{code}<a id="681" class="Comment">
+Let `Φ`, `Ψ` range over type contexts.
+
+## Type variables
+
+A type variable is indexed by its context and kind.
+</a>\begin{code}
+<a id="806" class="Keyword">data</a> <a id="_∋⋆_"></a><a id="811" href="Type.html#811" class="Datatype Operator">_∋⋆_</a> <a id="816" class="Symbol">:</a> <a id="818" href="Type.html#615" class="Datatype">Ctx⋆</a> <a id="823" class="Symbol">→</a> <a id="825" href="Type.html#388" class="Datatype">Kind</a> <a id="830" class="Symbol">→</a> <a id="832" class="PrimitiveType">Set</a> <a id="836" class="Keyword">where</a>
+
+  <a id="_∋⋆_.Z"></a><a id="845" href="Type.html#845" class="InductiveConstructor">Z</a> <a id="847" class="Symbol">:</a> <a id="849" class="Symbol">∀</a> <a id="851" class="Symbol">{</a><a id="852" href="Type.html#852" class="Bound">Φ</a> <a id="854" href="Type.html#854" class="Bound">J</a><a id="855" class="Symbol">}</a>
+      <a id="863" class="Comment">-------------</a>
+    <a id="881" class="Symbol">→</a> <a id="883" href="Type.html#852" class="Bound">Φ</a> <a id="885" href="Type.html#645" class="InductiveConstructor Operator">,⋆</a> <a id="888" href="Type.html#854" class="Bound">J</a> <a id="890" href="Type.html#811" class="Datatype Operator">∋⋆</a> <a id="893" href="Type.html#854" class="Bound">J</a>
+
+  <a id="_∋⋆_.S"></a><a id="898" href="Type.html#898" class="InductiveConstructor">S</a> <a id="900" class="Symbol">:</a> <a id="902" class="Symbol">∀</a> <a id="904" class="Symbol">{</a><a id="905" href="Type.html#905" class="Bound">Φ</a> <a id="907" href="Type.html#907" class="Bound">J</a> <a id="909" href="Type.html#909" class="Bound">K</a><a id="910" class="Symbol">}</a> <a id="912" class="Comment">-- S_ permits things like &#39;S f x&#39; as well as &#39;S (f x)&#39;...</a>
+    <a id="974" class="Symbol">→</a> <a id="976" href="Type.html#905" class="Bound">Φ</a> <a id="978" href="Type.html#811" class="Datatype Operator">∋⋆</a> <a id="981" href="Type.html#907" class="Bound">J</a>
+      <a id="989" class="Comment">-------------</a>
+    <a id="1007" class="Symbol">→</a> <a id="1009" href="Type.html#905" class="Bound">Φ</a> <a id="1011" href="Type.html#645" class="InductiveConstructor Operator">,⋆</a> <a id="1014" href="Type.html#909" class="Bound">K</a> <a id="1016" href="Type.html#811" class="Datatype Operator">∋⋆</a> <a id="1019" href="Type.html#907" class="Bound">J</a>
+\end{code}<a id="1031" class="Comment">
+Let `α`, `β` range over type variables.
+
+## Types
+
+A type is indexed by its context and kind.  A type is either a type
+variable, a pi type, or a function type.
+</a>\begin{code}
+<a id="1205" class="Keyword">data</a> <a id="_⊢⋆_"></a><a id="1210" href="Type.html#1210" class="Datatype Operator">_⊢⋆_</a> <a id="1215" class="Symbol">:</a> <a id="1217" href="Type.html#615" class="Datatype">Ctx⋆</a> <a id="1222" class="Symbol">→</a> <a id="1224" href="Type.html#388" class="Datatype">Kind</a> <a id="1229" class="Symbol">→</a> <a id="1231" class="PrimitiveType">Set</a> <a id="1235" class="Keyword">where</a>
+
+  <a id="_⊢⋆_.`"></a><a id="1244" href="Type.html#1244" class="InductiveConstructor">`</a> <a id="1246" class="Symbol">:</a> <a id="1248" class="Symbol">∀</a> <a id="1250" class="Symbol">{</a><a id="1251" href="Type.html#1251" class="Bound">Φ</a> <a id="1253" href="Type.html#1253" class="Bound">J</a><a id="1254" class="Symbol">}</a>
+    <a id="1260" class="Symbol">→</a> <a id="1262" href="Type.html#1251" class="Bound">Φ</a> <a id="1264" href="Type.html#811" class="Datatype Operator">∋⋆</a> <a id="1267" href="Type.html#1253" class="Bound">J</a>
+      <a id="1275" class="Comment">--------</a>
+    <a id="1288" class="Symbol">→</a> <a id="1290" href="Type.html#1251" class="Bound">Φ</a> <a id="1292" href="Type.html#1210" class="Datatype Operator">⊢⋆</a> <a id="1295" href="Type.html#1253" class="Bound">J</a>
+
+  <a id="_⊢⋆_.Π"></a><a id="1300" href="Type.html#1300" class="InductiveConstructor">Π</a> <a id="1302" class="Symbol">:</a> <a id="1304" class="Symbol">∀</a> <a id="1306" class="Symbol">{</a><a id="1307" href="Type.html#1307" class="Bound">Φ</a> <a id="1309" href="Type.html#1309" class="Bound">K</a><a id="1310" class="Symbol">}</a>
+    <a id="1316" class="Symbol">→</a> <a id="1318" href="Type.html#1307" class="Bound">Φ</a> <a id="1320" href="Type.html#645" class="InductiveConstructor Operator">,⋆</a> <a id="1323" href="Type.html#1309" class="Bound">K</a> <a id="1325" href="Type.html#1210" class="Datatype Operator">⊢⋆</a> <a id="1328" href="Type.html#407" class="InductiveConstructor">*</a>
+      <a id="1336" class="Comment">-----------</a>
+    <a id="1352" class="Symbol">→</a> <a id="1354" href="Type.html#1307" class="Bound">Φ</a> <a id="1356" href="Type.html#1210" class="Datatype Operator">⊢⋆</a> <a id="1359" href="Type.html#407" class="InductiveConstructor">*</a>
+
+  <a id="_⊢⋆_._⇒_"></a><a id="1364" href="Type.html#1364" class="InductiveConstructor Operator">_⇒_</a> <a id="1368" class="Symbol">:</a> <a id="1370" class="Symbol">∀</a> <a id="1372" class="Symbol">{</a><a id="1373" href="Type.html#1373" class="Bound">Φ</a><a id="1374" class="Symbol">}</a>
+    <a id="1380" class="Symbol">→</a> <a id="1382" href="Type.html#1373" class="Bound">Φ</a> <a id="1384" href="Type.html#1210" class="Datatype Operator">⊢⋆</a> <a id="1387" href="Type.html#407" class="InductiveConstructor">*</a>
+    <a id="1393" class="Symbol">→</a> <a id="1395" href="Type.html#1373" class="Bound">Φ</a> <a id="1397" href="Type.html#1210" class="Datatype Operator">⊢⋆</a> <a id="1400" href="Type.html#407" class="InductiveConstructor">*</a>
+      <a id="1408" class="Comment">------</a>
+    <a id="1419" class="Symbol">→</a> <a id="1421" href="Type.html#1373" class="Bound">Φ</a> <a id="1423" href="Type.html#1210" class="Datatype Operator">⊢⋆</a> <a id="1426" href="Type.html#407" class="InductiveConstructor">*</a>
+
+  <a id="_⊢⋆_.ƛ"></a><a id="1431" href="Type.html#1431" class="InductiveConstructor">ƛ</a> <a id="1433" class="Symbol">:</a>  <a id="1436" class="Symbol">∀</a> <a id="1438" class="Symbol">{</a><a id="1439" href="Type.html#1439" class="Bound">Φ</a> <a id="1441" href="Type.html#1441" class="Bound">K</a> <a id="1443" href="Type.html#1443" class="Bound">J</a><a id="1444" class="Symbol">}</a>
+    <a id="1450" class="Symbol">→</a> <a id="1452" href="Type.html#1439" class="Bound">Φ</a> <a id="1454" href="Type.html#645" class="InductiveConstructor Operator">,⋆</a> <a id="1457" href="Type.html#1441" class="Bound">K</a> <a id="1459" href="Type.html#1210" class="Datatype Operator">⊢⋆</a> <a id="1462" href="Type.html#1443" class="Bound">J</a> 
+      <a id="1471" class="Comment">-----------</a>
+    <a id="1487" class="Symbol">→</a> <a id="1489" href="Type.html#1439" class="Bound">Φ</a> <a id="1491" href="Type.html#1210" class="Datatype Operator">⊢⋆</a> <a id="1494" href="Type.html#1441" class="Bound">K</a> <a id="1496" href="Type.html#418" class="InductiveConstructor Operator">⇒</a> <a id="1498" href="Type.html#1443" class="Bound">J</a>
+
+  <a id="_⊢⋆_._·_"></a><a id="1503" href="Type.html#1503" class="InductiveConstructor Operator">_·_</a> <a id="1507" class="Symbol">:</a> <a id="1509" class="Symbol">∀{</a><a id="1511" href="Type.html#1511" class="Bound">Φ</a> <a id="1513" href="Type.html#1513" class="Bound">K</a> <a id="1515" href="Type.html#1515" class="Bound">J</a><a id="1516" class="Symbol">}</a>
+    <a id="1522" class="Symbol">→</a> <a id="1524" href="Type.html#1511" class="Bound">Φ</a> <a id="1526" href="Type.html#1210" class="Datatype Operator">⊢⋆</a> <a id="1529" href="Type.html#1513" class="Bound">K</a> <a id="1531" href="Type.html#418" class="InductiveConstructor Operator">⇒</a> <a id="1533" href="Type.html#1515" class="Bound">J</a>
+    <a id="1539" class="Symbol">→</a> <a id="1541" href="Type.html#1511" class="Bound">Φ</a> <a id="1543" href="Type.html#1210" class="Datatype Operator">⊢⋆</a> <a id="1546" href="Type.html#1513" class="Bound">K</a>
+      <a id="1554" class="Comment">------</a>
+    <a id="1565" class="Symbol">→</a> <a id="1567" href="Type.html#1511" class="Bound">Φ</a> <a id="1569" href="Type.html#1210" class="Datatype Operator">⊢⋆</a> <a id="1572" href="Type.html#1515" class="Bound">J</a>
+
+  <a id="_⊢⋆_.μ"></a><a id="1577" href="Type.html#1577" class="InductiveConstructor">μ</a> <a id="1579" class="Symbol">:</a> <a id="1581" class="Symbol">∀{</a><a id="1583" href="Type.html#1583" class="Bound">φ</a> <a id="1585" href="Type.html#1585" class="Bound">K</a><a id="1586" class="Symbol">}</a>
+    <a id="1592" class="Symbol">→</a> <a id="1594" href="Type.html#1583" class="Bound">φ</a> <a id="1596" href="Type.html#645" class="InductiveConstructor Operator">,⋆</a> <a id="1599" href="Type.html#1585" class="Bound">K</a> <a id="1601" href="Type.html#1210" class="Datatype Operator">⊢⋆</a> <a id="1604" href="Type.html#1585" class="Bound">K</a>
+      <a id="1612" class="Comment">-----------</a>
+    <a id="1628" class="Symbol">→</a> <a id="1630" href="Type.html#1583" class="Bound">φ</a> <a id="1632" href="Type.html#1210" class="Datatype Operator">⊢⋆</a> <a id="1635" href="Type.html#1585" class="Bound">K</a>
+
+\end{code}<a id="1648" class="Comment">
+</a></pre></body></html>
