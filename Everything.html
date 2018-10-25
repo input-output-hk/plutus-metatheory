@@ -3,38 +3,41 @@
 <a id="14" class="Keyword">module</a> <a id="21" href="Everything.html" class="Module">Everything</a> <a id="32" class="Keyword">where</a>
 
 <a id="39" class="Comment">-- Types</a>
-<a id="48" class="Keyword">import</a> <a id="55" href="Type.html" class="Module">Type</a>
-<a id="60" class="Keyword">import</a> <a id="67" href="Type.RenamingSubstitution.html" class="Module">Type.RenamingSubstitution</a>
-<a id="93" class="Keyword">import</a> <a id="100" href="Type.Reduction.html" class="Module">Type.Reduction</a>
-<a id="115" class="Keyword">import</a> <a id="122" href="Type.Equality.html" class="Module">Type.Equality</a>
-<a id="136" class="Keyword">import</a> <a id="143" href="Type.BetaNormal.html" class="Module">Type.BetaNormal</a>
 
-<a id="160" class="Comment">-- a beta NBE algorithm and accompanying soundness, completeness and</a>
-<a id="229" class="Comment">-- stability proofs and necessary equipment for substituting into</a>
-<a id="295" class="Comment">-- normal types by embedding back into syntax, substituting and</a>
-<a id="359" class="Comment">-- renormalising</a>
-<a id="376" class="Keyword">import</a> <a id="383" href="Type.BetaNBE.html" class="Module">Type.BetaNBE</a>
-<a id="396" class="Keyword">import</a> <a id="403" href="Type.BetaNBE.Soundness.html" class="Module">Type.BetaNBE.Soundness</a>
-<a id="426" class="Keyword">import</a> <a id="433" href="Type.BetaNBE.Completeness.html" class="Module">Type.BetaNBE.Completeness</a>
-<a id="459" class="Keyword">import</a> <a id="466" href="Type.BetaNBE.Stability.html" class="Module">Type.BetaNBE.Stability</a>
-<a id="489" class="Keyword">import</a> <a id="496" href="Type.BetaNBE.RenamingSubstitution.html" class="Module">Type.BetaNBE.RenamingSubstitution</a>
+<a id="49" class="Keyword">import</a> <a id="56" href="Type.html" class="Module">Type</a>
+<a id="61" class="Keyword">import</a> <a id="68" href="Type.RenamingSubstitution.html" class="Module">Type.RenamingSubstitution</a>
+<a id="94" class="Keyword">import</a> <a id="101" href="Type.Reduction.html" class="Module">Type.Reduction</a>
+<a id="116" class="Keyword">import</a> <a id="123" href="Type.Equality.html" class="Module">Type.Equality</a>
 
-<a id="531" class="Comment">-- Terms, reduction and evaluation where terms are</a>
-<a id="582" class="Comment">-- indexed by normal types</a>
-<a id="609" class="Keyword">import</a> <a id="616" href="TermIndexedByNormalType.Term.html" class="Module">TermIndexedByNormalType.Term</a>
-<a id="645" class="Keyword">import</a> <a id="652" href="TermIndexedByNormalType.Term.RenamingSubstitution.html" class="Module">TermIndexedByNormalType.Term.RenamingSubstitution</a>
-<a id="702" class="Keyword">import</a> <a id="709" href="TermIndexedByNormalType.Term.Reduction.html" class="Module">TermIndexedByNormalType.Term.Reduction</a>
-<a id="748" class="Keyword">import</a> <a id="755" href="TermIndexedByNormalType.Evaluation.html" class="Module">TermIndexedByNormalType.Evaluation</a>
-<a id="790" class="Comment">--import TermIndexedByNormalType.Examples</a>
+<a id="138" class="Comment">-- a beta NBE algorithm and accompanying soundness, completeness and</a>
+<a id="207" class="Comment">-- stability proofs and necessary equipment for substituting into</a>
+<a id="273" class="Comment">-- normal types by embedding back into syntax, substituting and</a>
+<a id="337" class="Comment">-- renormalising</a>
 
-<a id="833" class="Comment">-- a complete attempt to index terms by syntactic types where</a>
-<a id="895" class="Comment">-- conversion takes an equation as an argument. Evaluation only works</a>
-<a id="965" class="Comment">-- in the absense of conversions in terms. This version of the syntax</a>
-<a id="1035" class="Comment">-- is arguably the most standard</a>
-<a id="1068" class="Keyword">import</a> <a id="1075" href="TermIndexedBySyntacticType.Term.html" class="Module">TermIndexedBySyntacticType.Term</a>
-<a id="1107" class="Keyword">import</a> <a id="1114" href="TermIndexedBySyntacticType.Term.RenamingSubstitution.html" class="Module">TermIndexedBySyntacticType.Term.RenamingSubstitution</a>
-<a id="1167" class="Keyword">import</a> <a id="1174" href="TermIndexedBySyntacticType.Term.Reduction.html" class="Module">TermIndexedBySyntacticType.Term.Reduction</a>
-<a id="1216" class="Keyword">import</a> <a id="1223" href="TermIndexedBySyntacticType.Evaluation.html" class="Module">TermIndexedBySyntacticType.Evaluation</a>
-<a id="1261" class="Comment">--import TermIndexedBySyntacticType.Examples</a>
-\end{code}<a id="1316" class="Comment">
+<a id="355" class="Keyword">import</a> <a id="362" href="Type.BetaNormal.html" class="Module">Type.BetaNormal</a>
+<a id="378" class="Keyword">import</a> <a id="385" href="Type.BetaNBE.html" class="Module">Type.BetaNBE</a>
+<a id="398" class="Keyword">import</a> <a id="405" href="Type.BetaNBE.Soundness.html" class="Module">Type.BetaNBE.Soundness</a>
+<a id="428" class="Keyword">import</a> <a id="435" href="Type.BetaNBE.Completeness.html" class="Module">Type.BetaNBE.Completeness</a>
+<a id="461" class="Keyword">import</a> <a id="468" href="Type.BetaNBE.Stability.html" class="Module">Type.BetaNBE.Stability</a>
+<a id="491" class="Keyword">import</a> <a id="498" href="Type.BetaNBE.RenamingSubstitution.html" class="Module">Type.BetaNBE.RenamingSubstitution</a>
+
+<a id="533" class="Comment">-- a complete attempt to index terms by syntactic types where</a>
+<a id="595" class="Comment">-- conversion takes an equation as an argument. Evaluation only works</a>
+<a id="665" class="Comment">-- in the absense of conversions in terms.</a>
+
+<a id="709" class="Keyword">import</a> <a id="716" href="TermIndexedBySyntacticType.Term.html" class="Module">TermIndexedBySyntacticType.Term</a>
+<a id="748" class="Keyword">import</a> <a id="755" href="TermIndexedBySyntacticType.Term.RenamingSubstitution.html" class="Module">TermIndexedBySyntacticType.Term.RenamingSubstitution</a>
+<a id="808" class="Keyword">import</a> <a id="815" href="TermIndexedBySyntacticType.Term.Reduction.html" class="Module">TermIndexedBySyntacticType.Term.Reduction</a>
+<a id="857" class="Keyword">import</a> <a id="864" href="TermIndexedBySyntacticType.Evaluation.html" class="Module">TermIndexedBySyntacticType.Evaluation</a>
+<a id="902" class="Comment">--import TermIndexedBySyntacticType.Examples</a>
+
+<a id="948" class="Comment">-- Terms, reduction and evaluation where terms are indexed by normal</a>
+<a id="1017" class="Comment">-- types</a>
+
+<a id="1027" class="Keyword">import</a> <a id="1034" href="TermIndexedByNormalType.Term.html" class="Module">TermIndexedByNormalType.Term</a>
+<a id="1063" class="Keyword">import</a> <a id="1070" href="TermIndexedByNormalType.Term.RenamingSubstitution.html" class="Module">TermIndexedByNormalType.Term.RenamingSubstitution</a>
+<a id="1120" class="Keyword">import</a> <a id="1127" href="TermIndexedByNormalType.Term.Reduction.html" class="Module">TermIndexedByNormalType.Term.Reduction</a>
+<a id="1166" class="Keyword">import</a> <a id="1173" href="TermIndexedByNormalType.Evaluation.html" class="Module">TermIndexedByNormalType.Evaluation</a>
+<a id="1208" class="Comment">--import TermIndexedByNormalType.Examples</a>
+\end{code}<a id="1260" class="Comment">
 </a></pre></body></html>
