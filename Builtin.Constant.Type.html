@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>Builtin.Constant.Type</title><link rel="stylesheet" href="Agda.css"></head><body><pre>\begin{code}
+<a id="14" class="Keyword">module</a> <a id="21" href="Builtin.Constant.Type.html" class="Module">Builtin.Constant.Type</a> <a id="43" class="Keyword">where</a>
+\end{code}<a id="59" class="Comment">
+
+## Type constants
+
+We have three base types referred to as type constants, integer,
+bytestring, and size, size is used to limit the size of integers and
+bytestrings
+
+</a>\begin{code}
+<a id="240" class="Keyword">data</a> <a id="TyCon"></a><a id="245" href="Builtin.Constant.Type.html#245" class="Datatype">TyCon</a> <a id="251" class="Symbol">:</a> <a id="253" class="PrimitiveType">Set</a> <a id="257" class="Keyword">where</a>
+  <a id="TyCon.integer"></a><a id="265" href="Builtin.Constant.Type.html#265" class="InductiveConstructor">integer</a>    <a id="276" class="Symbol">:</a> <a id="278" href="Builtin.Constant.Type.html#245" class="Datatype">TyCon</a>
+  <a id="TyCon.bytestring"></a><a id="286" href="Builtin.Constant.Type.html#286" class="InductiveConstructor">bytestring</a> <a id="297" class="Symbol">:</a> <a id="299" href="Builtin.Constant.Type.html#245" class="Datatype">TyCon</a>
+  <a id="TyCon.size"></a><a id="307" href="Builtin.Constant.Type.html#307" class="InductiveConstructor">size</a>       <a id="318" class="Symbol">:</a> <a id="320" href="Builtin.Constant.Type.html#245" class="Datatype">TyCon</a>
+\end{code}<a id="336" class="Comment">
+</a></pre></body></html>
