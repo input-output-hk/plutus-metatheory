@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>Builtin</title><link rel="stylesheet" href="Agda.css"></head><body><pre>\begin{code}
+<a id="14" class="Keyword">module</a> <a id="21" href="Builtin.html" class="Module">Builtin</a> <a id="29" class="Keyword">where</a>
+
+
+<a id="37" class="Keyword">data</a> <a id="Builtin"></a><a id="42" href="Builtin.html#42" class="Datatype">Builtin</a> <a id="50" class="Symbol">:</a> <a id="52" class="PrimitiveType">Set</a> <a id="56" class="Keyword">where</a>
+  <a id="Builtin.addInteger"></a><a id="64" href="Builtin.html#64" class="InductiveConstructor">addInteger</a>               <a id="89" class="Symbol">:</a> <a id="91" href="Builtin.html#42" class="Datatype">Builtin</a>
+  <a id="Builtin.subtractInteger"></a><a id="101" href="Builtin.html#101" class="InductiveConstructor">subtractInteger</a>          <a id="126" class="Symbol">:</a> <a id="128" href="Builtin.html#42" class="Datatype">Builtin</a>
+  <a id="Builtin.multiplyInteger"></a><a id="138" href="Builtin.html#138" class="InductiveConstructor">multiplyInteger</a>          <a id="163" class="Symbol">:</a> <a id="165" href="Builtin.html#42" class="Datatype">Builtin</a>
+  <a id="Builtin.divideInteger"></a><a id="175" href="Builtin.html#175" class="InductiveConstructor">divideInteger</a>            <a id="200" class="Symbol">:</a> <a id="202" href="Builtin.html#42" class="Datatype">Builtin</a>
+  <a id="Builtin.quotientInteger"></a><a id="212" href="Builtin.html#212" class="InductiveConstructor">quotientInteger</a>          <a id="237" class="Symbol">:</a> <a id="239" href="Builtin.html#42" class="Datatype">Builtin</a>
+  <a id="Builtin.remainderInteger"></a><a id="249" href="Builtin.html#249" class="InductiveConstructor">remainderInteger</a>         <a id="274" class="Symbol">:</a> <a id="276" href="Builtin.html#42" class="Datatype">Builtin</a>
+  <a id="Builtin.modInteger"></a><a id="286" href="Builtin.html#286" class="InductiveConstructor">modInteger</a>               <a id="311" class="Symbol">:</a> <a id="313" href="Builtin.html#42" class="Datatype">Builtin</a>
+  <a id="Builtin.lessThanInteger"></a><a id="323" href="Builtin.html#323" class="InductiveConstructor">lessThanInteger</a>          <a id="348" class="Symbol">:</a> <a id="350" href="Builtin.html#42" class="Datatype">Builtin</a>
+  <a id="Builtin.lessThanEqualsInteger"></a><a id="360" href="Builtin.html#360" class="InductiveConstructor">lessThanEqualsInteger</a>    <a id="385" class="Symbol">:</a> <a id="387" href="Builtin.html#42" class="Datatype">Builtin</a>
+  <a id="Builtin.greaterThanInteger"></a><a id="397" href="Builtin.html#397" class="InductiveConstructor">greaterThanInteger</a>       <a id="422" class="Symbol">:</a> <a id="424" href="Builtin.html#42" class="Datatype">Builtin</a>
+  <a id="Builtin.greaterThanEqualsInteger"></a><a id="434" href="Builtin.html#434" class="InductiveConstructor">greaterThanEqualsInteger</a> <a id="459" class="Symbol">:</a> <a id="461" href="Builtin.html#42" class="Datatype">Builtin</a>
+  <a id="Builtin.equalsInteger"></a><a id="471" href="Builtin.html#471" class="InductiveConstructor">equalsInteger</a>            <a id="496" class="Symbol">:</a> <a id="498" href="Builtin.html#42" class="Datatype">Builtin</a>
+  <a id="Builtin.resizeInteger"></a><a id="508" href="Builtin.html#508" class="InductiveConstructor">resizeInteger</a>            <a id="533" class="Symbol">:</a> <a id="535" href="Builtin.html#42" class="Datatype">Builtin</a>
+  <a id="Builtin.sizeOfInteger"></a><a id="545" href="Builtin.html#545" class="InductiveConstructor">sizeOfInteger</a>            <a id="570" class="Symbol">:</a> <a id="572" href="Builtin.html#42" class="Datatype">Builtin</a>
+  <a id="Builtin.intToByteString"></a><a id="582" href="Builtin.html#582" class="InductiveConstructor">intToByteString</a>          <a id="607" class="Symbol">:</a> <a id="609" href="Builtin.html#42" class="Datatype">Builtin</a>
+
+  <a id="Builtin.concatenate"></a><a id="620" href="Builtin.html#620" class="InductiveConstructor">concatenate</a>      <a id="637" class="Symbol">:</a> <a id="639" href="Builtin.html#42" class="Datatype">Builtin</a>
+  <a id="Builtin.takeByteString"></a><a id="649" href="Builtin.html#649" class="InductiveConstructor">takeByteString</a>   <a id="666" class="Symbol">:</a> <a id="668" href="Builtin.html#42" class="Datatype">Builtin</a>
+  <a id="Builtin.dropByteString"></a><a id="678" href="Builtin.html#678" class="InductiveConstructor">dropByteString</a>   <a id="695" class="Symbol">:</a> <a id="697" href="Builtin.html#42" class="Datatype">Builtin</a>
+  <a id="Builtin.sha2-256"></a><a id="707" href="Builtin.html#707" class="InductiveConstructor">sha2-256</a>         <a id="724" class="Symbol">:</a> <a id="726" href="Builtin.html#42" class="Datatype">Builtin</a>
+  <a id="Builtin.sha3-256"></a><a id="736" href="Builtin.html#736" class="InductiveConstructor">sha3-256</a>         <a id="753" class="Symbol">:</a> <a id="755" href="Builtin.html#42" class="Datatype">Builtin</a>
+  <a id="Builtin.verifySignature"></a><a id="765" href="Builtin.html#765" class="InductiveConstructor">verifySignature</a>  <a id="782" class="Symbol">:</a> <a id="784" href="Builtin.html#42" class="Datatype">Builtin</a>
+  <a id="Builtin.resizeByteString"></a><a id="794" href="Builtin.html#794" class="InductiveConstructor">resizeByteString</a> <a id="811" class="Symbol">:</a> <a id="813" href="Builtin.html#42" class="Datatype">Builtin</a>
+  <a id="Builtin.equalsByteString"></a><a id="823" href="Builtin.html#823" class="InductiveConstructor">equalsByteString</a> <a id="840" class="Symbol">:</a> <a id="842" href="Builtin.html#42" class="Datatype">Builtin</a>
+  <a id="Builtin.txh"></a><a id="852" href="Builtin.html#852" class="InductiveConstructor">txh</a>              <a id="869" class="Symbol">:</a> <a id="871" href="Builtin.html#42" class="Datatype">Builtin</a>
+  <a id="Builtin.blocknum"></a><a id="881" href="Builtin.html#881" class="InductiveConstructor">blocknum</a>         <a id="898" class="Symbol">:</a> <a id="900" href="Builtin.html#42" class="Datatype">Builtin</a>
+\end{code}<a id="918" class="Comment">
+</a></pre></body></html>
