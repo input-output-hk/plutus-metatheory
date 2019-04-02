@@ -1,3 +1,9 @@
+# This repository has been ASSIMILATED into the main [plutus repository](https://github.com/input-output-hk/plutus)
+
+Where it lives in the [metatheory folder]((https://github.com/input-output-hk/plutus).
+
+This version will not be updated. 2 April 2019.
+
 # plutus-metatheory
 *Mechanised meta theory for Plutus Core*
 
