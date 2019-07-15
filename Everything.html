@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html><head><meta charset="utf-8"><title>Everything</title><link rel="stylesheet" href="Agda.css"></head><body><pre>\begin{code}
+<html><head><meta charset="utf-8"><title>Everything</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Markup">\begin{code}</a>
 <a id="14" class="Keyword">module</a> <a id="21" href="Everything.html" class="Module">Everything</a> <a id="32" class="Keyword">where</a>
 
 <a id="39" class="Comment">-- Types</a>
@@ -30,23 +30,55 @@
 <a id="746" class="Keyword">import</a> <a id="753" href="Builtin.Constant.Type.html" class="Module">Builtin.Constant.Type</a>
 <a id="775" class="Keyword">import</a> <a id="782" href="Builtin.Constant.Term.html" class="Module">Builtin.Constant.Term</a>
 
-<a id="805" class="Keyword">import</a> <a id="812" href="Declarative.Term.html" class="Module">Declarative.Term</a>
-<a id="829" class="Keyword">import</a> <a id="836" href="Declarative.Term.RenamingSubstitution.html" class="Module">Declarative.Term.RenamingSubstitution</a>
-<a id="874" class="Keyword">import</a> <a id="881" href="Declarative.Term.Reduction.html" class="Module">Declarative.Term.Reduction</a>
-<a id="908" class="Keyword">import</a> <a id="915" href="Declarative.Evaluation.html" class="Module">Declarative.Evaluation</a>
-<a id="938" class="Keyword">import</a> <a id="945" href="Declarative.Main.html" class="Module">Declarative.Main</a>
-<a id="962" class="Keyword">import</a> <a id="969" href="Declarative.Examples.html" class="Module">Declarative.Examples</a>
+<a id="805" class="Keyword">import</a> <a id="812" href="Declarative.html" class="Module">Declarative</a>
+<a id="824" class="Keyword">import</a> <a id="831" href="Declarative.RenamingSubstitution.html" class="Module">Declarative.RenamingSubstitution</a>
+<a id="864" class="Keyword">import</a> <a id="871" href="Declarative.Reduction.html" class="Module">Declarative.Reduction</a>
+<a id="893" class="Keyword">import</a> <a id="900" href="Declarative.Evaluation.html" class="Module">Declarative.Evaluation</a>
+<a id="923" class="Keyword">import</a> <a id="930" href="Declarative.Erasure.html" class="Module">Declarative.Erasure</a>
 
-<a id="991" class="Comment">-- Terms, reduction and evaluation where terms are indexed by normal</a>
-<a id="1060" class="Comment">-- types</a>
+<a id="951" class="Comment">--import Declarative.Examples</a>
+<a id="981" class="Keyword">import</a> <a id="988" href="Declarative.StdLib.Unit.html" class="Module">Declarative.StdLib.Unit</a>
+<a id="1012" class="Keyword">import</a> <a id="1019" href="Declarative.StdLib.Bool.html" class="Module">Declarative.StdLib.Bool</a>
+<a id="1043" class="Keyword">import</a> <a id="1050" href="Declarative.StdLib.Function.html" class="Module">Declarative.StdLib.Function</a>
+<a id="1078" class="Keyword">import</a> <a id="1085" href="Declarative.StdLib.ChurchNat.html" class="Module">Declarative.StdLib.ChurchNat</a>
+<a id="1114" class="Keyword">import</a> <a id="1121" href="Declarative.StdLib.Nat.html" class="Module">Declarative.StdLib.Nat</a>
+<a id="1144" class="Keyword">import</a> <a id="1151" href="Main.html" class="Module">Main</a>
 
-<a id="1070" class="Keyword">import</a> <a id="1077" href="Algorithmic.Term.html" class="Module">Algorithmic.Term</a>
-<a id="1094" class="Keyword">import</a> <a id="1101" href="Algorithmic.Term.RenamingSubstitution.html" class="Module">Algorithmic.Term.RenamingSubstitution</a>
-<a id="1139" class="Keyword">import</a> <a id="1146" href="Algorithmic.Term.Reduction.html" class="Module">Algorithmic.Term.Reduction</a>
-<a id="1173" class="Keyword">import</a> <a id="1180" href="Algorithmic.Evaluation.html" class="Module">Algorithmic.Evaluation</a>
-<a id="1203" class="Keyword">import</a> <a id="1210" href="Algorithmic.Examples.html" class="Module">Algorithmic.Examples</a>
-<a id="1231" class="Keyword">import</a> <a id="1238" href="Algorithmic.Main.html" class="Module">Algorithmic.Main</a>
-<a id="1255" class="Keyword">import</a> <a id="1262" href="Algorithmic.Soundness.html" class="Module">Algorithmic.Soundness</a>
-<a id="1284" class="Keyword">import</a> <a id="1291" href="Algorithmic.Completeness.html" class="Module">Algorithmic.Completeness</a>
-\end{code}<a id="1326" class="Comment">
+<a id="1157" class="Comment">-- Terms, reduction and evaluation where terms are indexed by normal</a>
+<a id="1226" class="Comment">-- types</a>
+
+<a id="1236" class="Keyword">import</a> <a id="1243" href="Algorithmic.html" class="Module">Algorithmic</a>
+<a id="1255" class="Keyword">import</a> <a id="1262" href="Algorithmic.RenamingSubstitution.html" class="Module">Algorithmic.RenamingSubstitution</a>
+<a id="1295" class="Keyword">import</a> <a id="1302" href="Algorithmic.Reduction.html" class="Module">Algorithmic.Reduction</a>
+<a id="1324" class="Keyword">import</a> <a id="1331" href="Algorithmic.Evaluation.html" class="Module">Algorithmic.Evaluation</a>
+<a id="1354" class="Keyword">import</a> <a id="1361" href="Algorithmic.Examples.html" class="Module">Algorithmic.Examples</a>
+<a id="1382" class="Keyword">import</a> <a id="1389" href="Algorithmic.Main.html" class="Module">Algorithmic.Main</a>
+<a id="1406" class="Keyword">import</a> <a id="1413" href="Algorithmic.Soundness.html" class="Module">Algorithmic.Soundness</a>
+<a id="1435" class="Keyword">import</a> <a id="1442" href="Algorithmic.Completeness.html" class="Module">Algorithmic.Completeness</a>
+<a id="1467" class="Keyword">import</a> <a id="1474" href="Algorithmic.Erasure.html" class="Module">Algorithmic.Erasure</a>
+<a id="1494" class="Keyword">import</a> <a id="1501" href="Algorithmic.Erasure.Reduction.html" class="Module">Algorithmic.Erasure.Reduction</a>
+
+<a id="1532" class="Comment">-- Terms, that carry witnesses of their type&#39;s reduction to normal form</a>
+
+<a id="1605" class="Keyword">import</a> <a id="1612" href="AlgorithmicRed.Term.html" class="Module">AlgorithmicRed.Term</a>
+<a id="1632" class="Keyword">import</a> <a id="1639" href="AlgorithmicRed.Term.RenamingSubstitution.html" class="Module">AlgorithmicRed.Term.RenamingSubstitution</a>
+
+<a id="1681" class="Comment">-- Untyped terms, reduction and evaluation</a>
+
+<a id="1725" class="Keyword">import</a> <a id="1732" href="Untyped.html" class="Module">Untyped</a>
+<a id="1740" class="Keyword">import</a> <a id="1747" href="Untyped.RenamingSubstitution.html" class="Module">Untyped.RenamingSubstitution</a>
+<a id="1776" class="Keyword">import</a> <a id="1783" href="Untyped.Reduction.html" class="Module">Untyped.Reduction</a>
+
+<a id="1802" class="Comment">-- Extrinsically typed terms, reduction and evaluation</a>
+
+<a id="1858" class="Keyword">import</a> <a id="1865" href="Scoped.html" class="Module">Scoped</a>
+<a id="1872" class="Keyword">import</a> <a id="1879" href="Scoped.RenamingSubstitution.html" class="Module">Scoped.RenamingSubstitution</a>
+<a id="1907" class="Keyword">import</a> <a id="1914" href="Scoped.Reduction.html" class="Module">Scoped.Reduction</a>
+<a id="1931" class="Keyword">import</a> <a id="1938" href="Scoped.Extrication.html" class="Module">Scoped.Extrication</a>
+<a id="1957" class="Keyword">import</a> <a id="1964" href="Scoped.Extrication.RenamingSubstitution.html" class="Module">Scoped.Extrication.RenamingSubstitution</a>
+<a id="2004" class="Comment">--import Scoped.Extrication.Reduction</a>
+<a id="2042" class="Keyword">import</a> <a id="2049" href="Scoped.Erasure.html" class="Module">Scoped.Erasure</a>
+<a id="2064" class="Keyword">import</a> <a id="2071" href="Scoped.Erasure.RenamingSubstitution.html" class="Module">Scoped.Erasure.RenamingSubstitution</a>
+<a id="2107" class="Comment">--import Scoped.Erasure.Reduction</a>
+<a id="2141" class="Markup">\end{code}</a><a id="2151" class="Background">
 </a></pre></body></html>
