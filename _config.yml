@@ -33,8 +33,8 @@ twitter_username: InputOutputHK
 github_username:  input-output-hk
 
 header_pages:
-  - about.markdown
-  - Everything.md
+#  - about.markdown
+  - index.md
 
 # Build settings
 theme: minima
