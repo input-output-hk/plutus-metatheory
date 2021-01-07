@@ -3,83 +3,130 @@ layout: page
 title: Table of Contents
 ---
 
+The Formalisation is split into several sections:
 
-<pre class="Agda"><a id="53" class="Comment">-- Types</a>
-
-<a id="63" class="Keyword">import</a> <a id="70" href="Type.html" class="Module">Type</a>
-<a id="75" class="Keyword">import</a> <a id="82" href="Type.RenamingSubstitution.html" class="Module">Type.RenamingSubstitution</a>
-<a id="108" class="Keyword">import</a> <a id="115" href="Type.Reduction.html" class="Module">Type.Reduction</a>
-<a id="130" class="Keyword">import</a> <a id="137" href="Type.Equality.html" class="Module">Type.Equality</a>
-
-<a id="152" class="Comment">-- a beta NBE algorithm and accompanying soundness, completeness and</a>
-<a id="221" class="Comment">-- stability proofs and necessary equipment for substituting into</a>
-<a id="287" class="Comment">-- normal types by embedding back into syntax, substituting and</a>
-<a id="351" class="Comment">-- renormalising</a>
+1. Types
+2. Normalisation of types
+3. Builtin machinery
+4. Declarative terms
+5. Algorithmic terms
+6. Well-scoped types and terms
+7. A typechecker
+8. Untyped terms
+9. An executable
 
 
-<a id="370" class="Keyword">import</a> <a id="377" href="Type.BetaNormal.html" class="Module">Type.BetaNormal</a>
-<a id="393" class="Keyword">import</a> <a id="400" href="Type.BetaNBE.html" class="Module">Type.BetaNBE</a>
-<a id="413" class="Keyword">import</a> <a id="420" href="Type.BetaNBE.Soundness.html" class="Module">Type.BetaNBE.Soundness</a>
-<a id="443" class="Keyword">import</a> <a id="450" href="Type.BetaNBE.Completeness.html" class="Module">Type.BetaNBE.Completeness</a>
-<a id="476" class="Keyword">import</a> <a id="483" href="Type.BetaNBE.Stability.html" class="Module">Type.BetaNBE.Stability</a>
-<a id="506" class="Keyword">import</a> <a id="513" href="Type.BetaNBE.RenamingSubstitution.html" class="Module">Type.BetaNBE.RenamingSubstitution</a>
-<a id="547" class="Comment">-- a complete attempt to index terms by syntactic types where</a>
-<a id="609" class="Comment">-- conversion takes an equation as an argument. Evaluation only works</a>
-<a id="679" class="Comment">-- in the absense of conversions in terms.</a>
+## Types
 
-<a id="723" class="Comment">-- Builtins</a>
-<a id="735" class="Keyword">import</a> <a id="742" href="Builtin.Signature.html" class="Module">Builtin.Signature</a>
-<a id="760" class="Keyword">import</a> <a id="767" href="Builtin.Constant.Type.html" class="Module">Builtin.Constant.Type</a>
-<a id="789" class="Keyword">import</a> <a id="796" href="Builtin.Constant.Term.html" class="Module">Builtin.Constant.Term</a>
+Type syntax, renaming and substitution, a reduction algorithm (not
+used) and a definition of type equality.
 
-<a id="819" class="Keyword">import</a> <a id="826" href="Declarative.html" class="Module">Declarative</a>
-<a id="838" class="Keyword">import</a> <a id="845" href="Declarative.RenamingSubstitution.html" class="Module">Declarative.RenamingSubstitution</a>
-<a id="878" class="Keyword">import</a> <a id="885" href="Declarative.Erasure.html" class="Module">Declarative.Erasure</a>
+<pre class="Agda"><a id="404" class="Keyword">import</a> <a id="411" href="Type.html" class="Module">Type</a>
+<a id="416" class="Keyword">import</a> <a id="423" href="Type.RenamingSubstitution.html" class="Module">Type.RenamingSubstitution</a>
+<a id="449" class="Keyword">import</a> <a id="456" href="Type.Reduction.html" class="Module">Type.Reduction</a>
+<a id="471" class="Keyword">import</a> <a id="478" href="Type.Equality.html" class="Module">Type.Equality</a>
+</pre>
+## Normal Types
 
-<a id="906" class="Keyword">import</a> <a id="913" href="Declarative.Examples.html" class="Module">Declarative.Examples</a>
-<a id="934" class="Keyword">import</a> <a id="941" href="Declarative.Examples.StdLib.Function.html" class="Module">Declarative.Examples.StdLib.Function</a>
-<a id="978" class="Keyword">import</a> <a id="985" href="Declarative.Examples.StdLib.ChurchNat.html" class="Module">Declarative.Examples.StdLib.ChurchNat</a>
-<a id="1023" class="Keyword">import</a> <a id="1030" href="Declarative.Examples.StdLib.Nat.html" class="Module">Declarative.Examples.StdLib.Nat</a>
+Beta normal forms, a beta NBE algorithm and accompanying soundness,
+completeness and stability proofs and necessary equipment for
+substituting into normal types by embedding back into syntax,
+substituting and renormalising.
 
-<a id="1063" class="Comment">-- Terms, reduction and evaluation where terms are indexed by normal</a>
-<a id="1132" class="Comment">-- types</a>
+<pre class="Agda"><a id="743" class="Keyword">import</a> <a id="750" href="Type.BetaNormal.html" class="Module">Type.BetaNormal</a>
+<a id="766" class="Keyword">import</a> <a id="773" href="Type.BetaNBE.html" class="Module">Type.BetaNBE</a>
+<a id="786" class="Keyword">import</a> <a id="793" href="Type.BetaNBE.Soundness.html" class="Module">Type.BetaNBE.Soundness</a>
+<a id="816" class="Keyword">import</a> <a id="823" href="Type.BetaNBE.Completeness.html" class="Module">Type.BetaNBE.Completeness</a>
+<a id="849" class="Keyword">import</a> <a id="856" href="Type.BetaNBE.Stability.html" class="Module">Type.BetaNBE.Stability</a>
+<a id="879" class="Keyword">import</a> <a id="886" href="Type.BetaNBE.RenamingSubstitution.html" class="Module">Type.BetaNBE.RenamingSubstitution</a>
+</pre>
 
-<a id="1142" class="Keyword">import</a> <a id="1149" href="Algorithmic.html" class="Module">Algorithmic</a>
-<a id="1161" class="Keyword">import</a> <a id="1168" href="Algorithmic.RenamingSubstitution.html" class="Module">Algorithmic.RenamingSubstitution</a>
-<a id="1201" class="Keyword">import</a> <a id="1208" href="Algorithmic.Reduction.html" class="Module">Algorithmic.Reduction</a>
-<a id="1230" class="Keyword">import</a> <a id="1237" href="Algorithmic.Evaluation.html" class="Module">Algorithmic.Evaluation</a>
-<a id="1260" class="Keyword">import</a> <a id="1267" href="Algorithmic.Main.html" class="Module">Algorithmic.Main</a>
-<a id="1284" class="Keyword">import</a> <a id="1291" href="Algorithmic.Completeness.html" class="Module">Algorithmic.Completeness</a>
-<a id="1316" class="Keyword">import</a> <a id="1323" href="Algorithmic.Soundness.html" class="Module">Algorithmic.Soundness</a>
-<a id="1345" class="Keyword">import</a> <a id="1352" href="Algorithmic.Erasure.html" class="Module">Algorithmic.Erasure</a>
-<a id="1372" class="Keyword">import</a> <a id="1379" href="Algorithmic.Erasure.RenamingSubstitution.html" class="Module">Algorithmic.Erasure.RenamingSubstitution</a>
-<a id="1420" class="Comment">--import Algorithmic.Erasure.Reduction</a>
-<a id="1459" class="Keyword">import</a> <a id="1466" href="Algorithmic.CK.html" class="Module">Algorithmic.CK</a>
-<a id="1481" class="Keyword">import</a> <a id="1488" href="Algorithmic.CEKV.html" class="Module">Algorithmic.CEKV</a>
 
-<a id="1506" class="Keyword">import</a> <a id="1513" href="Algorithmic.Examples.html" class="Module">Algorithmic.Examples</a>
+## Builtins
 
-<a id="1535" class="Comment">-- Untyped terms, reduction and evaluation</a>
+Builtins extend the core System F-omega-mu calculus with primitive
+types such as integers and bytestrings and operations on them.
 
-<a id="1579" class="Keyword">import</a> <a id="1586" href="Untyped.html" class="Module">Untyped</a>
-<a id="1594" class="Keyword">import</a> <a id="1601" href="Untyped.RenamingSubstitution.html" class="Module">Untyped.RenamingSubstitution</a>
-<a id="1630" class="Keyword">import</a> <a id="1637" href="Untyped.Reduction.html" class="Module">Untyped.Reduction</a>
+<pre class="Agda"><a id="1075" class="Keyword">import</a> <a id="1082" href="Builtin.Signature.html" class="Module">Builtin.Signature</a>
+<a id="1100" class="Keyword">import</a> <a id="1107" href="Builtin.Constant.Type.html" class="Module">Builtin.Constant.Type</a>
+<a id="1129" class="Keyword">import</a> <a id="1136" href="Builtin.Constant.Term.html" class="Module">Builtin.Constant.Term</a>
+</pre>
+## Declarative syntax
 
-<a id="1656" class="Comment">-- Extrinsically typed terms, reduction and evaluation</a>
-<a id="1711" class="Keyword">import</a> <a id="1718" href="Scoped.html" class="Module">Scoped</a>
-<a id="1725" class="Keyword">import</a> <a id="1732" href="Scoped.RenamingSubstitution.html" class="Module">Scoped.RenamingSubstitution</a>
+A version of the syntax of terms, indexed by types, that includes the
+so-called conversion rule as a syntactic constructor. This is the most
+direct rendering of the typing rules as syntax but it is hard to
+execute programs presented in this syntax. No treatment of execution
+is given here, instead we introduce an alternative (algorithmic)
+syntax without the conversion rule below. This version serves as a
+reference/specification and we prove that the more algorithmic syntax
+is sound and complete with respect to it.
 
-<a id="1761" class="Keyword">import</a> <a id="1768" href="Scoped.Reduction.html" class="Module">Scoped.Reduction</a>
+<pre class="Agda"><a id="1710" class="Keyword">import</a> <a id="1717" href="Declarative.html" class="Module">Declarative</a>
+<a id="1729" class="Keyword">import</a> <a id="1736" href="Declarative.RenamingSubstitution.html" class="Module">Declarative.RenamingSubstitution</a>
+<a id="1769" class="Keyword">import</a> <a id="1776" href="Declarative.Erasure.html" class="Module">Declarative.Erasure</a>
 
-<a id="1786" class="Keyword">import</a> <a id="1793" href="Scoped.Extrication.html" class="Module">Scoped.Extrication</a>
-<a id="1812" class="Keyword">import</a> <a id="1819" href="Scoped.Extrication.RenamingSubstitution.html" class="Module">Scoped.Extrication.RenamingSubstitution</a>
-<a id="1859" class="Comment">--import Scoped.Extrication.Reduction</a>
-<a id="1897" class="Keyword">import</a> <a id="1904" href="Scoped.Erasure.html" class="Module">Scoped.Erasure</a>
-<a id="1919" class="Comment">--import Scoped.Erasure.RenamingSubstitution</a>
-<a id="1964" class="Comment">--import Scoped.Erasure.Reduction</a>
+<a id="1797" class="Keyword">import</a> <a id="1804" href="Declarative.Examples.html" class="Module">Declarative.Examples</a>
+<a id="1825" class="Keyword">import</a> <a id="1832" href="Declarative.Examples.StdLib.Function.html" class="Module">Declarative.Examples.StdLib.Function</a>
+<a id="1869" class="Keyword">import</a> <a id="1876" href="Declarative.Examples.StdLib.ChurchNat.html" class="Module">Declarative.Examples.StdLib.ChurchNat</a>
+<a id="1914" class="Keyword">import</a> <a id="1921" href="Declarative.Examples.StdLib.Nat.html" class="Module">Declarative.Examples.StdLib.Nat</a>
+</pre>
+## Algorithmic syntax
 
-<a id="1999" class="Keyword">import</a> <a id="2006" href="Scoped.CK.html" class="Module">Scoped.CK</a>
+Terms, reduction and evaluation where terms are indexed by normal
+types
 
-<a id="2017" class="Keyword">import</a> <a id="2024" href="Check.html" class="Module">Check</a>
-<a id="2030" class="Keyword">import</a> <a id="2037" href="Main.html" class="Module">Main</a>
+<pre class="Agda"><a id="2058" class="Keyword">import</a> <a id="2065" href="Algorithmic.html" class="Module">Algorithmic</a>
+<a id="2077" class="Keyword">import</a> <a id="2084" href="Algorithmic.RenamingSubstitution.html" class="Module">Algorithmic.RenamingSubstitution</a>
+<a id="2117" class="Keyword">import</a> <a id="2124" href="Algorithmic.Reduction.html" class="Module">Algorithmic.Reduction</a>
+<a id="2146" class="Keyword">import</a> <a id="2153" href="Algorithmic.Evaluation.html" class="Module">Algorithmic.Evaluation</a>
+<a id="2176" class="Keyword">import</a> <a id="2183" href="Algorithmic.Main.html" class="Module">Algorithmic.Main</a>
+<a id="2200" class="Keyword">import</a> <a id="2207" href="Algorithmic.Completeness.html" class="Module">Algorithmic.Completeness</a>
+<a id="2232" class="Keyword">import</a> <a id="2239" href="Algorithmic.Soundness.html" class="Module">Algorithmic.Soundness</a>
+<a id="2261" class="Keyword">import</a> <a id="2268" href="Algorithmic.Erasure.html" class="Module">Algorithmic.Erasure</a>
+<a id="2288" class="Keyword">import</a> <a id="2295" href="Algorithmic.Erasure.RenamingSubstitution.html" class="Module">Algorithmic.Erasure.RenamingSubstitution</a>
+<a id="2336" class="Comment">--import Algorithmic.Erasure.Reduction</a>
+<a id="2375" class="Keyword">import</a> <a id="2382" href="Algorithmic.CK.html" class="Module">Algorithmic.CK</a>
+<a id="2397" class="Keyword">import</a> <a id="2404" href="Algorithmic.CEKV.html" class="Module">Algorithmic.CEKV</a>
+
+<a id="2422" class="Keyword">import</a> <a id="2429" href="Algorithmic.Examples.html" class="Module">Algorithmic.Examples</a>
+</pre>
+## Extrinsically typed syntax a.k.a. Well Scoped Terms
+
+Extrinsically typed terms, reduction and evaluation
+
+<pre class="Agda"><a id="2568" class="Keyword">import</a> <a id="2575" href="Scoped.html" class="Module">Scoped</a>
+<a id="2582" class="Keyword">import</a> <a id="2589" href="Scoped.RenamingSubstitution.html" class="Module">Scoped.RenamingSubstitution</a>
+
+<a id="2618" class="Keyword">import</a> <a id="2625" href="Scoped.Reduction.html" class="Module">Scoped.Reduction</a>
+
+<a id="2643" class="Keyword">import</a> <a id="2650" href="Scoped.Extrication.html" class="Module">Scoped.Extrication</a>
+<a id="2669" class="Keyword">import</a> <a id="2676" href="Scoped.Extrication.RenamingSubstitution.html" class="Module">Scoped.Extrication.RenamingSubstitution</a>
+<a id="2716" class="Comment">--import Scoped.Extrication.Reduction</a>
+<a id="2754" class="Keyword">import</a> <a id="2761" href="Scoped.Erasure.html" class="Module">Scoped.Erasure</a>
+<a id="2776" class="Comment">--import Scoped.Erasure.RenamingSubstitution</a>
+<a id="2821" class="Comment">--import Scoped.Erasure.Reduction</a>
+<a id="2855" class="Keyword">import</a> <a id="2862" href="Scoped.CK.html" class="Module">Scoped.CK</a>
+</pre>
+## Untyped terms
+
+Untyped terms, reduction and evaluation
+
+<pre class="Agda"><a id="2940" class="Keyword">import</a> <a id="2947" href="Untyped.html" class="Module">Untyped</a>
+<a id="2955" class="Keyword">import</a> <a id="2962" href="Untyped.RenamingSubstitution.html" class="Module">Untyped.RenamingSubstitution</a>
+<a id="2991" class="Keyword">import</a> <a id="2998" href="Untyped.Reduction.html" class="Module">Untyped.Reduction</a>
+</pre>
+## Type checker
+
+This takes a well-scoped term and produces an intrinsically typed term
+as evidence of successful typechecking.
+
+<pre class="Agda"><a id="3154" class="Keyword">import</a> <a id="3161" href="Check.html" class="Module">Check</a>
+</pre>
+## Executable
+
+This module is is compiled to Haskell and then can be compiled by ghc
+to produce an executable.
+
+<pre class="Agda"><a id="3288" class="Keyword">import</a> <a id="3295" href="Main.html" class="Module">Main</a>
 </pre>
