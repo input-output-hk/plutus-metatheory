@@ -120,4 +120,7 @@ arbitrary kind `k` which goes beyond standard iso-recursive types.
         <a id="2413" class="Comment">------</a>
       <a id="2426" class="Symbol">→</a> <a id="2428" href="Type.html#1071" class="Generalizable">Φ</a> <a id="2430" href="Type.html#2004" class="Datatype Operator">⊢⋆</a> <a id="2433" href="Type.html#591" class="InductiveConstructor">*</a>
 </pre>
-Let `A`, `B`, `C` range over types.
+Let `A`, `B`, `C` range over types:
+<pre class="Agda"><a id="2480" class="Keyword">variable</a>
+  <a id="2491" href="Type.html#2491" class="Generalizable">A</a> <a id="2493" href="Type.html#2493" class="Generalizable">A&#39;</a> <a id="2496" href="Type.html#2496" class="Generalizable">B</a> <a id="2498" href="Type.html#2498" class="Generalizable">B&#39;</a> <a id="2501" href="Type.html#2501" class="Generalizable">C</a> <a id="2503" href="Type.html#2503" class="Generalizable">C&#39;</a>  <a id="2507" class="Symbol">:</a> <a id="2509" href="Type.html#1071" class="Generalizable">Φ</a> <a id="2511" href="Type.html#2004" class="Datatype Operator">⊢⋆</a> <a id="2514" href="Type.html#814" class="Generalizable">J</a>
+</pre>

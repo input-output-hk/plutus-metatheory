@@ -52,8 +52,8 @@ used in the normalisation proof.
 
 <pre class="Agda"><a id="2297" class="Keyword">import</a> <a id="2304" href="Type.html" class="Module">Type</a>
 <a id="2309" class="Keyword">import</a> <a id="2316" href="Type.RenamingSubstitution.html" class="Module">Type.RenamingSubstitution</a>
-<a id="2342" class="Keyword">import</a> <a id="2349" href="Type.Reduction.html" class="Module">Type.Reduction</a>
-<a id="2364" class="Keyword">import</a> <a id="2371" href="Type.Equality.html" class="Module">Type.Equality</a>
+<a id="2342" class="Keyword">import</a> <a id="2349" href="Type.Equality.html" class="Module">Type.Equality</a>
+<a id="2363" class="Keyword">import</a> <a id="2370" href="Type.Reduction.html" class="Module">Type.Reduction</a>
 </pre>
 ## Normal Types
 
