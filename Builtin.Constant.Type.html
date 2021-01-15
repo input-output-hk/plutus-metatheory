@@ -1,128 +1,133 @@
-<!DOCTYPE HTML>
-<html><head><meta charset="utf-8"><title>Builtin.Constant.Type</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Markup">\begin{code}</a>
-<a id="14" class="Keyword">module</a> <a id="21" href="Builtin.Constant.Type.html" class="Module">Builtin.Constant.Type</a> <a id="43" class="Keyword">where</a>
-<a id="49" class="Markup">\end{code}</a><a id="59" class="Background">
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Type level constants | Plutus metatheory library</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Type level constants" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This repository contains a model of Plutus Core (PLC) written in Agda. We prove metatheoretic properties of the model in Agda and test the production PLC implementation against the model in Haskell by compiling the Agda code to Haskell and executing it." />
+<meta property="og:description" content="This repository contains a model of Plutus Core (PLC) written in Agda. We prove metatheoretic properties of the model in Agda and test the production PLC implementation against the model in Haskell by compiling the Agda code to Haskell and executing it." />
+<link rel="canonical" href="/plutus-metatheory/Builtin.Constant.Type.html" />
+<meta property="og:url" content="/plutus-metatheory/Builtin.Constant.Type.html" />
+<meta property="og:site_name" content="Plutus metatheory library" />
+<script type="application/ld+json">
+{"description":"This repository contains a model of Plutus Core (PLC) written in Agda. We prove metatheoretic properties of the model in Agda and test the production PLC implementation against the model in Haskell by compiling the Agda code to Haskell and executing it.","headline":"Type level constants","@type":"WebPage","url":"/plutus-metatheory/Builtin.Constant.Type.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/plutus-metatheory/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/plutus-metatheory/feed.xml" title="Plutus metatheory library" /></head>
+<body><header class="site-header" role="banner">
 
-## Imports
+  <div class="wrapper"><a class="site-title" rel="author" href="/plutus-metatheory/">Plutus metatheory library</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
 
-</a><a id="73" class="Markup">\begin{code}</a>
-<a id="86" class="Keyword">open</a> <a id="91" class="Keyword">import</a> <a id="98" href="Agda.Builtin.Char.html" class="Module">Agda.Builtin.Char</a>
-<a id="116" class="Keyword">open</a> <a id="121" class="Keyword">import</a> <a id="128" href="Agda.Builtin.Int.html" class="Module">Agda.Builtin.Int</a>
-<a id="145" class="Keyword">open</a> <a id="150" class="Keyword">import</a> <a id="157" href="Agda.Builtin.String.html" class="Module">Agda.Builtin.String</a>
-<a id="177" class="Keyword">open</a> <a id="182" class="Keyword">import</a> <a id="189" href="Data.Integer.html" class="Module">Data.Integer</a> <a id="202" class="Keyword">using</a> <a id="208" class="Symbol">(</a><a id="209" href="Agda.Builtin.Int.html#246" class="Datatype">ℤ</a><a id="210" class="Symbol">;</a><a id="211" href="Data.Integer.Base.html#2817" class="Function Operator">-_</a><a id="213" class="Symbol">;</a><a id="214" href="Data.Integer.Base.html#1569" class="InductiveConstructor">+≤+</a><a id="217" class="Symbol">;</a><a id="218" href="Data.Integer.Base.html#1536" class="InductiveConstructor">-≤+</a><a id="221" class="Symbol">;</a><a id="222" href="Data.Integer.Base.html#1480" class="InductiveConstructor">-≤-</a><a id="225" class="Symbol">;</a><a id="226" href="Data.Integer.Base.html#1619" class="Datatype Operator">_&lt;_</a><a id="229" class="Symbol">;</a><a id="230" href="Data.Integer.Base.html#1809" class="Function Operator">_&gt;_</a><a id="233" class="Symbol">;</a><a id="234" href="Data.Integer.Properties.html#3354" class="Function Operator">_≤?_</a><a id="238" class="Symbol">;</a><a id="239" href="Data.Integer.Properties.html#7702" class="Function Operator">_&lt;?_</a><a id="243" class="Symbol">;</a><a id="244" href="Data.Integer.Base.html#1779" class="Function Operator">_≥_</a><a id="247" class="Symbol">;</a><a id="248" href="Data.Integer.Base.html#1454" class="Datatype Operator">_≤_</a><a id="251" class="Symbol">)</a>
-<a id="253" class="Keyword">open</a> <a id="258" class="Keyword">import</a> <a id="265" href="Data.Unit.html" class="Module">Data.Unit</a> <a id="275" class="Keyword">using</a> <a id="281" class="Symbol">(</a><a id="282" href="Agda.Builtin.Unit.html#164" class="Record">⊤</a><a id="283" class="Symbol">)</a>
-<a id="285" class="Keyword">open</a> <a id="290" class="Keyword">import</a> <a id="297" href="Data.Bool.html" class="Module">Data.Bool</a> <a id="307" class="Keyword">using</a> <a id="313" class="Symbol">(</a><a id="314" href="Agda.Builtin.Bool.html#163" class="Datatype">Bool</a><a id="318" class="Symbol">)</a>
-<a id="320" class="Keyword">open</a> <a id="325" class="Keyword">import</a> <a id="332" href="Data.Product.html" class="Module">Data.Product</a>
-<a id="345" class="Keyword">open</a> <a id="350" class="Keyword">import</a> <a id="357" href="Relation.Binary.html" class="Module">Relation.Binary</a>
-<a id="373" class="Keyword">open</a> <a id="378" class="Keyword">import</a> <a id="385" href="Data.Nat.html" class="Module">Data.Nat</a> <a id="394" class="Keyword">using</a> <a id="400" class="Symbol">(</a><a id="401" href="Agda.Builtin.Nat.html#192" class="Datatype">ℕ</a><a id="402" class="Symbol">;</a><a id="403" href="Agda.Builtin.Nat.html#528" class="Primitive Operator">_*_</a><a id="406" class="Symbol">;</a><a id="407" href="Data.Nat.Base.html#960" class="InductiveConstructor">z≤n</a><a id="410" class="Symbol">;</a><a id="411" href="Data.Nat.Base.html#1002" class="InductiveConstructor">s≤s</a><a id="414" class="Symbol">;</a><a id="415" href="Agda.Builtin.Nat.html#210" class="InductiveConstructor">zero</a><a id="419" class="Symbol">;</a><a id="420" href="Agda.Builtin.Nat.html#223" class="InductiveConstructor">suc</a><a id="423" class="Symbol">)</a>
-<a id="425" class="Keyword">open</a> <a id="430" class="Keyword">import</a> <a id="437" href="Relation.Binary.PropositionalEquality.html" class="Module">Relation.Binary.PropositionalEquality</a>
-<a id="475" class="Keyword">open</a> <a id="480" class="Keyword">import</a> <a id="487" href="Relation.Nullary.html" class="Module">Relation.Nullary</a>
-<a id="504" class="Keyword">open</a> <a id="509" class="Keyword">import</a> <a id="516" href="Function.html" class="Module">Function</a>
+        <div class="trigger"><a class="page-link" href="/plutus-metatheory/">Table of Contents</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
 
-<a id="526" class="Keyword">open</a> <a id="531" class="Keyword">import</a> <a id="538" href="Utils.html" class="Module">Utils</a>
-<a id="544" class="Markup">\end{code}</a><a id="554" class="Background">
+  <header class="post-header">
+    <link rel="stylesheet" href="/plutus-metatheory/assets/css/Agda.css">
+    <h1 class="post-title">Type level constants</h1>
+  </header>
 
-## Abstract semantics of builtins
+  <div class="post-content">
+    <p>This module contains the type level constants and also postulated
+operations for builtins that are imported from Haskell libraries.</p>
 
-</a><a id="591" class="Markup">\begin{code}</a>
-<a id="604" class="Keyword">postulate</a>
-  <a id="ByteString"></a><a id="616" href="Builtin.Constant.Type.html#616" class="Postulate">ByteString</a> <a id="627" class="Symbol">:</a> <a id="629" class="PrimitiveType">Set</a>
-  <a id="length"></a><a id="635" href="Builtin.Constant.Type.html#635" class="Postulate">length</a>     <a id="646" class="Symbol">:</a> <a id="648" href="Builtin.Constant.Type.html#616" class="Postulate">ByteString</a> <a id="659" class="Symbol">→</a> <a id="661" href="Agda.Builtin.Nat.html#192" class="Datatype">ℕ</a>
+<p>The postulated operations are in this module because it is not
+parameterised. They could also be placed elsewhere.</p>
 
-  <a id="div"></a><a id="666" href="Builtin.Constant.Type.html#666" class="Postulate">div</a>            <a id="681" class="Symbol">:</a> <a id="683" href="Agda.Builtin.Int.html#246" class="Datatype">Int</a> <a id="687" class="Symbol">→</a> <a id="689" href="Agda.Builtin.Int.html#246" class="Datatype">Int</a> <a id="693" class="Symbol">→</a> <a id="695" href="Agda.Builtin.Int.html#246" class="Datatype">Int</a>
-  <a id="quot"></a><a id="701" href="Builtin.Constant.Type.html#701" class="Postulate">quot</a>           <a id="716" class="Symbol">:</a> <a id="718" href="Agda.Builtin.Int.html#246" class="Datatype">Int</a> <a id="722" class="Symbol">→</a> <a id="724" href="Agda.Builtin.Int.html#246" class="Datatype">Int</a> <a id="728" class="Symbol">→</a> <a id="730" href="Agda.Builtin.Int.html#246" class="Datatype">Int</a>
-  <a id="rem"></a><a id="736" href="Builtin.Constant.Type.html#736" class="Postulate">rem</a>            <a id="751" class="Symbol">:</a> <a id="753" href="Agda.Builtin.Int.html#246" class="Datatype">Int</a> <a id="757" class="Symbol">→</a> <a id="759" href="Agda.Builtin.Int.html#246" class="Datatype">Int</a> <a id="763" class="Symbol">→</a> <a id="765" href="Agda.Builtin.Int.html#246" class="Datatype">Int</a>
-  <a id="mod"></a><a id="771" href="Builtin.Constant.Type.html#771" class="Postulate">mod</a>            <a id="786" class="Symbol">:</a> <a id="788" href="Agda.Builtin.Int.html#246" class="Datatype">Int</a> <a id="792" class="Symbol">→</a> <a id="794" href="Agda.Builtin.Int.html#246" class="Datatype">Int</a> <a id="798" class="Symbol">→</a> <a id="800" href="Agda.Builtin.Int.html#246" class="Datatype">Int</a>
+<pre class="Agda"><a id="304" class="Keyword">module</a> <a id="311" href="Builtin.Constant.Type.html" class="Module">Builtin.Constant.Type</a> <a id="333" class="Keyword">where</a>
+</pre>
+<h2 id="imports">Imports</h2>
 
-  <a id="concat"></a><a id="807" href="Builtin.Constant.Type.html#807" class="Postulate">concat</a>    <a id="817" class="Symbol">:</a> <a id="819" href="Builtin.Constant.Type.html#616" class="Postulate">ByteString</a> <a id="830" class="Symbol">→</a> <a id="832" href="Builtin.Constant.Type.html#616" class="Postulate">ByteString</a> <a id="843" class="Symbol">→</a> <a id="845" href="Builtin.Constant.Type.html#616" class="Postulate">ByteString</a>
-  <a id="take"></a><a id="858" href="Builtin.Constant.Type.html#858" class="Postulate">take</a>      <a id="868" class="Symbol">:</a> <a id="870" href="Agda.Builtin.Int.html#246" class="Datatype">Int</a> <a id="874" class="Symbol">→</a> <a id="876" href="Builtin.Constant.Type.html#616" class="Postulate">ByteString</a> <a id="887" class="Symbol">→</a> <a id="889" href="Builtin.Constant.Type.html#616" class="Postulate">ByteString</a>
-  <a id="drop"></a><a id="902" href="Builtin.Constant.Type.html#902" class="Postulate">drop</a>      <a id="912" class="Symbol">:</a> <a id="914" href="Agda.Builtin.Int.html#246" class="Datatype">Int</a> <a id="918" class="Symbol">→</a> <a id="920" href="Builtin.Constant.Type.html#616" class="Postulate">ByteString</a> <a id="931" class="Symbol">→</a> <a id="933" href="Builtin.Constant.Type.html#616" class="Postulate">ByteString</a>
-  <a id="SHA2-256"></a><a id="946" href="Builtin.Constant.Type.html#946" class="Postulate">SHA2-256</a>  <a id="956" class="Symbol">:</a> <a id="958" href="Builtin.Constant.Type.html#616" class="Postulate">ByteString</a> <a id="969" class="Symbol">→</a> <a id="971" href="Builtin.Constant.Type.html#616" class="Postulate">ByteString</a>
-  <a id="SHA3-256"></a><a id="984" href="Builtin.Constant.Type.html#984" class="Postulate">SHA3-256</a>  <a id="994" class="Symbol">:</a> <a id="996" href="Builtin.Constant.Type.html#616" class="Postulate">ByteString</a> <a id="1007" class="Symbol">→</a> <a id="1009" href="Builtin.Constant.Type.html#616" class="Postulate">ByteString</a>
-  <a id="verifySig"></a><a id="1022" href="Builtin.Constant.Type.html#1022" class="Postulate">verifySig</a> <a id="1032" class="Symbol">:</a> <a id="1034" href="Builtin.Constant.Type.html#616" class="Postulate">ByteString</a> <a id="1045" class="Symbol">→</a> <a id="1047" href="Builtin.Constant.Type.html#616" class="Postulate">ByteString</a> <a id="1058" class="Symbol">→</a> <a id="1060" href="Builtin.Constant.Type.html#616" class="Postulate">ByteString</a> <a id="1071" class="Symbol">→</a> <a id="1073" href="Utils.html#486" class="Datatype">Maybe</a> <a id="1079" href="Agda.Builtin.Bool.html#163" class="Datatype">Bool</a>
-  <a id="equals"></a><a id="1086" href="Builtin.Constant.Type.html#1086" class="Postulate">equals</a>    <a id="1096" class="Symbol">:</a> <a id="1098" href="Builtin.Constant.Type.html#616" class="Postulate">ByteString</a> <a id="1109" class="Symbol">→</a> <a id="1111" href="Builtin.Constant.Type.html#616" class="Postulate">ByteString</a> <a id="1122" class="Symbol">→</a> <a id="1124" href="Agda.Builtin.Bool.html#163" class="Datatype">Bool</a>
+<pre class="Agda"><a id="360" class="Keyword">open</a> <a id="365" class="Keyword">import</a> <a id="372" href="Agda.Builtin.Char.html" class="Module">Agda.Builtin.Char</a>
+<a id="390" class="Keyword">open</a> <a id="395" class="Keyword">import</a> <a id="402" href="Agda.Builtin.Int.html" class="Module">Agda.Builtin.Int</a>
+<a id="419" class="Keyword">open</a> <a id="424" class="Keyword">import</a> <a id="431" href="Agda.Builtin.String.html" class="Module">Agda.Builtin.String</a>
+<a id="451" class="Keyword">open</a> <a id="456" class="Keyword">import</a> <a id="463" href="Data.Integer.html" class="Module">Data.Integer</a> <a id="476" class="Keyword">using</a> <a id="482" class="Symbol">(</a><a id="483" href="Agda.Builtin.Int.html#246" class="Datatype">ℤ</a><a id="484" class="Symbol">;</a><a id="485" href="Data.Integer.Base.html#2817" class="Function Operator">-_</a><a id="487" class="Symbol">;</a><a id="488" href="Data.Integer.Base.html#1569" class="InductiveConstructor">+≤+</a><a id="491" class="Symbol">;</a><a id="492" href="Data.Integer.Base.html#1536" class="InductiveConstructor">-≤+</a><a id="495" class="Symbol">;</a><a id="496" href="Data.Integer.Base.html#1480" class="InductiveConstructor">-≤-</a><a id="499" class="Symbol">;</a><a id="500" href="Data.Integer.Base.html#1619" class="Datatype Operator">_&lt;_</a><a id="503" class="Symbol">;</a><a id="504" href="Data.Integer.Base.html#1809" class="Function Operator">_&gt;_</a><a id="507" class="Symbol">;</a><a id="508" href="Data.Integer.Properties.html#3354" class="Function Operator">_≤?_</a><a id="512" class="Symbol">;</a><a id="513" href="Data.Integer.Properties.html#7702" class="Function Operator">_&lt;?_</a><a id="517" class="Symbol">;</a><a id="518" href="Data.Integer.Base.html#1779" class="Function Operator">_≥_</a><a id="521" class="Symbol">;</a><a id="522" href="Data.Integer.Base.html#1454" class="Datatype Operator">_≤_</a><a id="525" class="Symbol">)</a>
+<a id="527" class="Keyword">open</a> <a id="532" class="Keyword">import</a> <a id="539" href="Data.Unit.html" class="Module">Data.Unit</a> <a id="549" class="Keyword">using</a> <a id="555" class="Symbol">(</a><a id="556" href="Agda.Builtin.Unit.html#164" class="Record">⊤</a><a id="557" class="Symbol">)</a>
+<a id="559" class="Keyword">open</a> <a id="564" class="Keyword">import</a> <a id="571" href="Data.Bool.html" class="Module">Data.Bool</a> <a id="581" class="Keyword">using</a> <a id="587" class="Symbol">(</a><a id="588" href="Agda.Builtin.Bool.html#163" class="Datatype">Bool</a><a id="592" class="Symbol">)</a>
+<a id="594" class="Keyword">open</a> <a id="599" class="Keyword">import</a> <a id="606" href="Data.Product.html" class="Module">Data.Product</a>
+<a id="619" class="Keyword">open</a> <a id="624" class="Keyword">import</a> <a id="631" href="Relation.Binary.html" class="Module">Relation.Binary</a>
+<a id="647" class="Keyword">open</a> <a id="652" class="Keyword">import</a> <a id="659" href="Data.Nat.html" class="Module">Data.Nat</a> <a id="668" class="Keyword">using</a> <a id="674" class="Symbol">(</a><a id="675" href="Agda.Builtin.Nat.html#192" class="Datatype">ℕ</a><a id="676" class="Symbol">;</a><a id="677" href="Agda.Builtin.Nat.html#528" class="Primitive Operator">_*_</a><a id="680" class="Symbol">;</a><a id="681" href="Data.Nat.Base.html#960" class="InductiveConstructor">z≤n</a><a id="684" class="Symbol">;</a><a id="685" href="Data.Nat.Base.html#1002" class="InductiveConstructor">s≤s</a><a id="688" class="Symbol">;</a><a id="689" href="Agda.Builtin.Nat.html#210" class="InductiveConstructor">zero</a><a id="693" class="Symbol">;</a><a id="694" href="Agda.Builtin.Nat.html#223" class="InductiveConstructor">suc</a><a id="697" class="Symbol">)</a>
+<a id="699" class="Keyword">open</a> <a id="704" class="Keyword">import</a> <a id="711" href="Relation.Binary.PropositionalEquality.html" class="Module">Relation.Binary.PropositionalEquality</a>
+<a id="749" class="Keyword">open</a> <a id="754" class="Keyword">import</a> <a id="761" href="Relation.Nullary.html" class="Module">Relation.Nullary</a>
+<a id="778" class="Keyword">open</a> <a id="783" class="Keyword">import</a> <a id="790" href="Function.html" class="Module">Function</a>
 
-  <a id="empty"></a><a id="1132" href="Builtin.Constant.Type.html#1132" class="Postulate">empty</a> <a id="1138" class="Symbol">:</a> <a id="1140" href="Builtin.Constant.Type.html#616" class="Postulate">ByteString</a>
-<a id="1151" class="Markup">\end{code}</a><a id="1161" class="Background">
+<a id="800" class="Keyword">open</a> <a id="805" class="Keyword">import</a> <a id="812" href="Utils.html" class="Module">Utils</a>
+</pre>
+<h1 id="some-integer-operations-missing-from-the-standard-library">Some integer operations missing from the standard library</h1>
 
-# What builtin operations should be compiled to if we compile to Haskell
+<pre class="Agda"><a id="_&gt;?_"></a><a id="889" href="Builtin.Constant.Type.html#889" class="Function Operator">_&gt;?_</a> <a id="894" class="Symbol">:</a> <a id="896" href="Relation.Binary.Definitions.html#4575" class="Function">Decidable</a> <a id="906" href="Data.Integer.Base.html#1809" class="Function Operator">_&gt;_</a>
+<a id="910" href="Builtin.Constant.Type.html#910" class="Bound">i</a> <a id="912" href="Builtin.Constant.Type.html#889" class="Function Operator">&gt;?</a> <a id="915" href="Builtin.Constant.Type.html#915" class="Bound">j</a> <a id="917" class="Symbol">=</a> <a id="919" href="Builtin.Constant.Type.html#915" class="Bound">j</a> <a id="921" href="Data.Integer.Properties.html#7702" class="Function Operator">&lt;?</a> <a id="924" href="Builtin.Constant.Type.html#910" class="Bound">i</a>
 
-</a><a id="1237" class="Markup">\begin{code}</a>
-<a id="1250" class="Symbol">{-#</a> <a id="1254" class="Keyword">FOREIGN</a> <a id="1262" class="Pragma">GHC</a> <a id="1266" class="Symbol">{-#</a> <a id="1270" class="Pragma">LANGUAGE</a> <a id="1279" class="Pragma">TypeApplications</a> <a id="1296" class="Symbol">#-}</a> <a id="1300" class="Symbol">#-}</a>
-<a id="1304" class="Symbol">{-#</a> <a id="1308" class="Keyword">FOREIGN</a> <a id="1316" class="Pragma">GHC</a> <a id="1320" class="Pragma">import</a> <a id="1327" class="Pragma">qualified</a> <a id="1337" class="Pragma">Data.ByteString</a> <a id="1353" class="Pragma">as</a> <a id="1356" class="Pragma">BS</a> <a id="1359" class="Symbol">#-}</a>
-<a id="1363" class="Symbol">{-#</a> <a id="1367" class="Keyword">FOREIGN</a> <a id="1375" class="Pragma">GHC</a> <a id="1379" class="Pragma">import</a> <a id="1386" class="Pragma">qualified</a> <a id="1396" class="Pragma">Data.ByteArray</a> <a id="1411" class="Pragma">as</a> <a id="1414" class="Pragma">B</a> <a id="1416" class="Symbol">#-}</a>
-<a id="1420" class="Symbol">{-#</a> <a id="1424" class="Keyword">FOREIGN</a> <a id="1432" class="Pragma">GHC</a> <a id="1436" class="Pragma">import</a> <a id="1443" class="Pragma">Debug.Trace</a> <a id="1455" class="Pragma">(trace)</a> <a id="1463" class="Symbol">#-}</a>
-<a id="1467" class="Symbol">{-#</a> <a id="1471" class="Keyword">FOREIGN</a> <a id="1479" class="Pragma">GHC</a> <a id="1483" class="Pragma">import</a> <a id="1490" class="Pragma">Crypto.Hash</a> <a id="1502" class="Pragma">(SHA256,</a> <a id="1511" class="Pragma">SHA3_256,</a> <a id="1521" class="Pragma">hash)</a> <a id="1527" class="Symbol">#-}</a>
-<a id="1531" class="Symbol">{-#</a> <a id="1535" class="Keyword">COMPILE</a> <a id="1543" class="Keyword">GHC</a> <a id="1547" href="Builtin.Constant.Type.html#616" class="Postulate">ByteString</a> <a id="1558" class="Pragma">=</a> <a id="1560" class="Pragma">type</a> <a id="1565" class="Pragma">BS.ByteString</a> <a id="1579" class="Symbol">#-}</a>
-<a id="1583" class="Symbol">{-#</a> <a id="1587" class="Keyword">COMPILE</a> <a id="1595" class="Keyword">GHC</a> <a id="1599" href="Builtin.Constant.Type.html#635" class="Postulate">length</a> <a id="1606" class="Pragma">=</a> <a id="1608" class="Pragma">toInteger</a> <a id="1618" class="Pragma">.</a> <a id="1620" class="Pragma">BS.length</a> <a id="1630" class="Symbol">#-}</a>
+<a id="_≥?_"></a><a id="927" href="Builtin.Constant.Type.html#927" class="Function Operator">_≥?_</a> <a id="932" class="Symbol">:</a> <a id="934" href="Relation.Binary.Definitions.html#4575" class="Function">Decidable</a> <a id="944" href="Data.Integer.Base.html#1779" class="Function Operator">_≥_</a>
+<a id="948" href="Builtin.Constant.Type.html#948" class="Bound">i</a> <a id="950" href="Builtin.Constant.Type.html#927" class="Function Operator">≥?</a> <a id="953" href="Builtin.Constant.Type.html#953" class="Bound">j</a> <a id="955" class="Symbol">=</a> <a id="957" href="Builtin.Constant.Type.html#953" class="Bound">j</a> <a id="959" href="Data.Integer.Properties.html#3354" class="Function Operator">≤?</a> <a id="962" href="Builtin.Constant.Type.html#948" class="Bound">i</a>
+</pre>
+<h2 id="type-constants">Type constants</h2>
 
-<a id="1635" class="Comment">-- no binding needed for addition</a>
-<a id="1669" class="Comment">-- no binding needed for subtract</a>
-<a id="1703" class="Comment">-- no binding needed for multiply</a>
+<p>We have six base types referred to as type constants:</p>
 
-<a id="1738" class="Symbol">{-#</a> <a id="1742" class="Keyword">COMPILE</a> <a id="1750" class="Keyword">GHC</a> <a id="1754" href="Builtin.Constant.Type.html#666" class="Postulate">div</a>  <a id="1759" class="Pragma">=</a> <a id="1761" class="Pragma">div</a>  <a id="1766" class="Symbol">#-}</a>
-<a id="1770" class="Symbol">{-#</a> <a id="1774" class="Keyword">COMPILE</a> <a id="1782" class="Keyword">GHC</a> <a id="1786" href="Builtin.Constant.Type.html#701" class="Postulate">quot</a> <a id="1791" class="Pragma">=</a> <a id="1793" class="Pragma">quot</a> <a id="1798" class="Symbol">#-}</a>
-<a id="1802" class="Symbol">{-#</a> <a id="1806" class="Keyword">COMPILE</a> <a id="1814" class="Keyword">GHC</a> <a id="1818" href="Builtin.Constant.Type.html#736" class="Postulate">rem</a>  <a id="1823" class="Pragma">=</a> <a id="1825" class="Pragma">rem</a>  <a id="1830" class="Symbol">#-}</a>
-<a id="1834" class="Symbol">{-#</a> <a id="1838" class="Keyword">COMPILE</a> <a id="1846" class="Keyword">GHC</a> <a id="1850" href="Builtin.Constant.Type.html#771" class="Postulate">mod</a>  <a id="1855" class="Pragma">=</a> <a id="1857" class="Pragma">mod</a>  <a id="1862" class="Symbol">#-}</a>
+<pre class="Agda"><a id="1047" class="Keyword">data</a> <a id="TyCon"></a><a id="1052" href="Builtin.Constant.Type.html#1052" class="Datatype">TyCon</a> <a id="1058" class="Symbol">:</a> <a id="1060" class="PrimitiveType">Set</a> <a id="1064" class="Keyword">where</a>
+  <a id="TyCon.integer"></a><a id="1072" href="Builtin.Constant.Type.html#1072" class="InductiveConstructor">integer</a>    <a id="1083" class="Symbol">:</a> <a id="1085" href="Builtin.Constant.Type.html#1052" class="Datatype">TyCon</a>
+  <a id="TyCon.bytestring"></a><a id="1093" href="Builtin.Constant.Type.html#1093" class="InductiveConstructor">bytestring</a> <a id="1104" class="Symbol">:</a> <a id="1106" href="Builtin.Constant.Type.html#1052" class="Datatype">TyCon</a>
+  <a id="TyCon.string"></a><a id="1114" href="Builtin.Constant.Type.html#1114" class="InductiveConstructor">string</a>     <a id="1125" class="Symbol">:</a> <a id="1127" href="Builtin.Constant.Type.html#1052" class="Datatype">TyCon</a>
+  <a id="TyCon.char"></a><a id="1135" href="Builtin.Constant.Type.html#1135" class="InductiveConstructor">char</a>       <a id="1146" class="Symbol">:</a> <a id="1148" href="Builtin.Constant.Type.html#1052" class="Datatype">TyCon</a>
+  <a id="TyCon.unit"></a><a id="1156" href="Builtin.Constant.Type.html#1156" class="InductiveConstructor">unit</a>       <a id="1167" class="Symbol">:</a> <a id="1169" href="Builtin.Constant.Type.html#1052" class="Datatype">TyCon</a>
+  <a id="TyCon.bool"></a><a id="1177" href="Builtin.Constant.Type.html#1177" class="InductiveConstructor">bool</a>       <a id="1188" class="Symbol">:</a> <a id="1190" href="Builtin.Constant.Type.html#1052" class="Datatype">TyCon</a>
 
-<a id="1867" class="Comment">-- no binding needed for lessthan</a>
-<a id="1901" class="Comment">-- no binding needed for lessthaneq</a>
-<a id="1937" class="Comment">-- no binding needed for greaterthan</a>
-<a id="1974" class="Comment">-- no binding needed for greaterthaneq</a>
-<a id="2013" class="Comment">-- no binding needed for equals</a>
+<a id="1197" class="Symbol">{-#</a> <a id="1201" class="Keyword">FOREIGN</a> <a id="1209" class="Pragma">GHC</a> <a id="1213" class="Symbol">{-#</a> <a id="1217" class="Pragma">LANGUAGE</a> <a id="1226" class="Pragma">GADTs,</a> <a id="1233" class="Pragma">PatternSynonyms</a> <a id="1249" class="Symbol">#-}</a>                   <a id="1271" class="Symbol">#-}</a>
+<a id="1275" class="Symbol">{-#</a> <a id="1279" class="Keyword">FOREIGN</a> <a id="1287" class="Pragma">GHC</a> <a id="1291" class="Pragma">import</a> <a id="1298" class="Pragma">Language.PlutusCore</a>                                <a id="1349" class="Symbol">#-}</a>
+<a id="1353" class="Symbol">{-#</a> <a id="1357" class="Keyword">FOREIGN</a> <a id="1365" class="Pragma">GHC</a> <a id="1369" class="Pragma">type</a> <a id="1374" class="Pragma">TypeBuiltin</a> <a id="1386" class="Pragma">=</a> <a id="1388" class="Pragma">Some</a> <a id="1393" class="Pragma">(TypeIn</a> <a id="1401" class="Pragma">DefaultUni)</a>               <a id="1427" class="Symbol">#-}</a>
+<a id="1431" class="Symbol">{-#</a> <a id="1435" class="Keyword">FOREIGN</a> <a id="1443" class="Pragma">GHC</a> <a id="1447" class="Pragma">pattern</a> <a id="1455" class="Pragma">TyInteger</a>    <a id="1468" class="Pragma">=</a> <a id="1470" class="Pragma">Some</a> <a id="1475" class="Pragma">(TypeIn</a> <a id="1483" class="Pragma">DefaultUniInteger)</a>    <a id="1505" class="Symbol">#-}</a>
+<a id="1509" class="Symbol">{-#</a> <a id="1513" class="Keyword">FOREIGN</a> <a id="1521" class="Pragma">GHC</a> <a id="1525" class="Pragma">pattern</a> <a id="1533" class="Pragma">TyByteString</a> <a id="1546" class="Pragma">=</a> <a id="1548" class="Pragma">Some</a> <a id="1553" class="Pragma">(TypeIn</a> <a id="1561" class="Pragma">DefaultUniByteString)</a> <a id="1583" class="Symbol">#-}</a>
+<a id="1587" class="Symbol">{-#</a> <a id="1591" class="Keyword">FOREIGN</a> <a id="1599" class="Pragma">GHC</a> <a id="1603" class="Pragma">pattern</a> <a id="1611" class="Pragma">TyString</a>     <a id="1624" class="Pragma">=</a> <a id="1626" class="Pragma">Some</a> <a id="1631" class="Pragma">(TypeIn</a> <a id="1639" class="Pragma">DefaultUniString)</a>     <a id="1661" class="Symbol">#-}</a>
+<a id="1665" class="Symbol">{-#</a> <a id="1669" class="Keyword">FOREIGN</a> <a id="1677" class="Pragma">GHC</a> <a id="1681" class="Pragma">pattern</a> <a id="1689" class="Pragma">TyChar</a>       <a id="1702" class="Pragma">=</a> <a id="1704" class="Pragma">Some</a> <a id="1709" class="Pragma">(TypeIn</a> <a id="1717" class="Pragma">DefaultUniChar)</a>       <a id="1739" class="Symbol">#-}</a>
+<a id="1743" class="Symbol">{-#</a> <a id="1747" class="Keyword">FOREIGN</a> <a id="1755" class="Pragma">GHC</a> <a id="1759" class="Pragma">pattern</a> <a id="1767" class="Pragma">TyUnit</a>       <a id="1780" class="Pragma">=</a> <a id="1782" class="Pragma">Some</a> <a id="1787" class="Pragma">(TypeIn</a> <a id="1795" class="Pragma">DefaultUniUnit)</a>       <a id="1817" class="Symbol">#-}</a>
+<a id="1821" class="Symbol">{-#</a> <a id="1825" class="Keyword">FOREIGN</a> <a id="1833" class="Pragma">GHC</a> <a id="1837" class="Pragma">pattern</a> <a id="1845" class="Pragma">TyBool</a>       <a id="1858" class="Pragma">=</a> <a id="1860" class="Pragma">Some</a> <a id="1865" class="Pragma">(TypeIn</a> <a id="1873" class="Pragma">DefaultUniBool)</a>       <a id="1895" class="Symbol">#-}</a>
+<a id="1899" class="Symbol">{-#</a> <a id="1903" class="Keyword">COMPILE</a> <a id="1911" class="Keyword">GHC</a> <a id="1915" href="Builtin.Constant.Type.html#1052" class="Datatype">TyCon</a> <a id="1921" class="Pragma">=</a> <a id="1923" class="Pragma">data</a> <a id="1928" class="Pragma">TypeBuiltin</a> <a id="1940" class="Pragma">(TyInteger</a> <a id="1951" class="Pragma">|</a> <a id="1953" class="Pragma">TyByteString</a> <a id="1966" class="Pragma">|</a> <a id="1968" class="Pragma">TyString</a> <a id="1977" class="Pragma">|</a> <a id="1979" class="Pragma">TyChar</a> <a id="1986" class="Pragma">|</a> <a id="1988" class="Pragma">TyUnit</a> <a id="1995" class="Pragma">|</a> <a id="1997" class="Pragma">TyBool)</a> <a id="2005" class="Symbol">#-}</a>
+</pre>
 
-<a id="2046" class="Symbol">{-#</a> <a id="2050" class="Keyword">COMPILE</a> <a id="2058" class="Keyword">GHC</a> <a id="2062" href="Builtin.Constant.Type.html#807" class="Postulate">concat</a> <a id="2069" class="Pragma">=</a> <a id="2071" class="Pragma">BS.append</a> <a id="2081" class="Symbol">#-}</a>
-<a id="2085" class="Symbol">{-#</a> <a id="2089" class="Keyword">COMPILE</a> <a id="2097" class="Keyword">GHC</a> <a id="2101" href="Builtin.Constant.Type.html#858" class="Postulate">take</a> <a id="2106" class="Pragma">=</a> <a id="2108" class="Pragma">BS.take</a> <a id="2116" class="Pragma">.</a> <a id="2118" class="Pragma">fromIntegral</a> <a id="2131" class="Symbol">#-}</a>
-<a id="2135" class="Symbol">{-#</a> <a id="2139" class="Keyword">COMPILE</a> <a id="2147" class="Keyword">GHC</a> <a id="2151" href="Builtin.Constant.Type.html#902" class="Postulate">drop</a> <a id="2156" class="Pragma">=</a> <a id="2158" class="Pragma">BS.drop</a> <a id="2166" class="Pragma">.</a> <a id="2168" class="Pragma">fromIntegral</a> <a id="2181" class="Symbol">#-}</a>
-<a id="2185" class="Symbol">{-#</a> <a id="2189" class="Keyword">COMPILE</a> <a id="2197" class="Keyword">GHC</a> <a id="2201" href="Builtin.Constant.Type.html#946" class="Postulate">SHA2-256</a> <a id="2210" class="Pragma">=</a> <a id="2212" class="Pragma">B.convert</a> <a id="2222" class="Pragma">.</a> <a id="2224" class="Pragma">hash</a> <a id="2229" class="Pragma">@BS.ByteString</a> <a id="2244" class="Pragma">@SHA256</a> <a id="2252" class="Symbol">#-}</a>
-<a id="2256" class="Symbol">{-#</a> <a id="2260" class="Keyword">COMPILE</a> <a id="2268" class="Keyword">GHC</a> <a id="2272" href="Builtin.Constant.Type.html#984" class="Postulate">SHA3-256</a> <a id="2281" class="Pragma">=</a> <a id="2283" class="Pragma">B.convert</a> <a id="2293" class="Pragma">.</a> <a id="2295" class="Pragma">hash</a> <a id="2300" class="Pragma">@BS.ByteString</a> <a id="2315" class="Pragma">@SHA3_256</a> <a id="2325" class="Symbol">#-}</a>
-<a id="2329" class="Symbol">{-#</a> <a id="2333" class="Keyword">COMPILE</a> <a id="2341" class="Keyword">GHC</a> <a id="2345" href="Builtin.Constant.Type.html#1086" class="Postulate">equals</a> <a id="2352" class="Pragma">=</a> <a id="2354" class="Pragma">(==)</a> <a id="2359" class="Symbol">#-}</a>
+  </div>
 
-<a id="2364" class="Symbol">{-#</a> <a id="2368" class="Keyword">FOREIGN</a> <a id="2376" class="Pragma">GHC</a> <a id="2380" class="Pragma">import</a> <a id="2387" class="Pragma">Crypto</a> <a id="2394" class="Symbol">#-}</a>
-<a id="2398" class="Symbol">{-#</a> <a id="2402" class="Keyword">COMPILE</a> <a id="2410" class="Keyword">GHC</a> <a id="2414" href="Builtin.Constant.Type.html#1022" class="Postulate">verifySig</a> <a id="2424" class="Pragma">=</a> <a id="2426" class="Pragma">verifySignature</a> <a id="2442" class="Symbol">#-}</a>
+</article>
 
-<a id="2447" class="Comment">-- no binding needed for equalsByteString</a>
-<a id="2489" class="Symbol">{-#</a> <a id="2493" class="Keyword">COMPILE</a> <a id="2501" class="Keyword">GHC</a> <a id="2505" href="Builtin.Constant.Type.html#1132" class="Postulate">empty</a> <a id="2511" class="Pragma">=</a> <a id="2513" class="Pragma">BS.empty</a> <a id="2522" class="Symbol">#-}</a>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/plutus-metatheory/"></data>
 
-<a id="2527" class="Comment">-- no binding needed for charToStr</a>
-<a id="2562" class="Comment">-- no binding needed for appendStr</a>
-<a id="2597" class="Comment">-- no binding needed for traceStr</a>
+  <div class="wrapper">
 
-<a id="2632" class="Markup">\end{code}</a><a id="2642" class="Background">
+    <h2 class="footer-heading">Plutus metatheory library</h2>
 
-# Some integer operations missing from the standard library
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Plutus metatheory library</li></ul>
+      </div>
 
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/input-output-hk"><svg class="svg-icon"><use xlink:href="/plutus-metatheory/assets/minima-social-icons.svg#github"></use></svg> <span class="username">input-output-hk</span></a></li><li><a href="https://www.twitter.com/InputOutputHK"><svg class="svg-icon"><use xlink:href="/plutus-metatheory/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">InputOutputHK</span></a></li></ul>
+</div>
 
-</a><a id="2706" class="Markup">\begin{code}</a>
-<a id="_&gt;?_"></a><a id="2719" href="Builtin.Constant.Type.html#2719" class="Function Operator">_&gt;?_</a> <a id="2724" class="Symbol">:</a> <a id="2726" href="Relation.Binary.Definitions.html#4575" class="Function">Decidable</a> <a id="2736" href="Data.Integer.Base.html#1809" class="Function Operator">_&gt;_</a>
-<a id="2740" href="Builtin.Constant.Type.html#2740" class="Bound">i</a> <a id="2742" href="Builtin.Constant.Type.html#2719" class="Function Operator">&gt;?</a> <a id="2745" href="Builtin.Constant.Type.html#2745" class="Bound">j</a> <a id="2747" class="Symbol">=</a> <a id="2749" href="Builtin.Constant.Type.html#2745" class="Bound">j</a> <a id="2751" href="Data.Integer.Properties.html#7702" class="Function Operator">&lt;?</a> <a id="2754" href="Builtin.Constant.Type.html#2740" class="Bound">i</a>
+      <div class="footer-col footer-col-3">
+        <p>
+This repository contains a model of Plutus Core (PLC) written in Agda. We prove metatheoretic properties of the model in Agda and test the production PLC implementation against the model in Haskell by compiling the Agda code to Haskell and executing it.</p>
+      </div>
+    </div>
 
-<a id="_≥?_"></a><a id="2757" href="Builtin.Constant.Type.html#2757" class="Function Operator">_≥?_</a> <a id="2762" class="Symbol">:</a> <a id="2764" href="Relation.Binary.Definitions.html#4575" class="Function">Decidable</a> <a id="2774" href="Data.Integer.Base.html#1779" class="Function Operator">_≥_</a>
-<a id="2778" href="Builtin.Constant.Type.html#2778" class="Bound">i</a> <a id="2780" href="Builtin.Constant.Type.html#2757" class="Function Operator">≥?</a> <a id="2783" href="Builtin.Constant.Type.html#2783" class="Bound">j</a> <a id="2785" class="Symbol">=</a> <a id="2787" href="Builtin.Constant.Type.html#2783" class="Bound">j</a> <a id="2789" href="Data.Integer.Properties.html#3354" class="Function Operator">≤?</a> <a id="2792" href="Builtin.Constant.Type.html#2778" class="Bound">i</a>
-<a id="2794" class="Markup">\end{code}</a><a id="2804" class="Background">
+  </div>
 
-## Type constants
+</footer>
+</body>
 
-We have six base types referred to as type constants:
-
-</a><a id="2880" class="Markup">\begin{code}</a>
-<a id="2893" class="Keyword">data</a> <a id="TyCon"></a><a id="2898" href="Builtin.Constant.Type.html#2898" class="Datatype">TyCon</a> <a id="2904" class="Symbol">:</a> <a id="2906" class="PrimitiveType">Set</a> <a id="2910" class="Keyword">where</a>
-  <a id="TyCon.integer"></a><a id="2918" href="Builtin.Constant.Type.html#2918" class="InductiveConstructor">integer</a>    <a id="2929" class="Symbol">:</a> <a id="2931" href="Builtin.Constant.Type.html#2898" class="Datatype">TyCon</a>
-  <a id="TyCon.bytestring"></a><a id="2939" href="Builtin.Constant.Type.html#2939" class="InductiveConstructor">bytestring</a> <a id="2950" class="Symbol">:</a> <a id="2952" href="Builtin.Constant.Type.html#2898" class="Datatype">TyCon</a>
-  <a id="TyCon.string"></a><a id="2960" href="Builtin.Constant.Type.html#2960" class="InductiveConstructor">string</a>     <a id="2971" class="Symbol">:</a> <a id="2973" href="Builtin.Constant.Type.html#2898" class="Datatype">TyCon</a>
-  <a id="TyCon.char"></a><a id="2981" href="Builtin.Constant.Type.html#2981" class="InductiveConstructor">char</a>       <a id="2992" class="Symbol">:</a> <a id="2994" href="Builtin.Constant.Type.html#2898" class="Datatype">TyCon</a>
-  <a id="TyCon.unit"></a><a id="3002" href="Builtin.Constant.Type.html#3002" class="InductiveConstructor">unit</a>       <a id="3013" class="Symbol">:</a> <a id="3015" href="Builtin.Constant.Type.html#2898" class="Datatype">TyCon</a>
-  <a id="TyCon.bool"></a><a id="3023" href="Builtin.Constant.Type.html#3023" class="InductiveConstructor">bool</a>       <a id="3034" class="Symbol">:</a> <a id="3036" href="Builtin.Constant.Type.html#2898" class="Datatype">TyCon</a>
-
-<a id="3043" class="Symbol">{-#</a> <a id="3047" class="Keyword">FOREIGN</a> <a id="3055" class="Pragma">GHC</a> <a id="3059" class="Symbol">{-#</a> <a id="3063" class="Pragma">LANGUAGE</a> <a id="3072" class="Pragma">GADTs,</a> <a id="3079" class="Pragma">PatternSynonyms</a> <a id="3095" class="Symbol">#-}</a>                   <a id="3117" class="Symbol">#-}</a>
-<a id="3121" class="Symbol">{-#</a> <a id="3125" class="Keyword">FOREIGN</a> <a id="3133" class="Pragma">GHC</a> <a id="3137" class="Pragma">import</a> <a id="3144" class="Pragma">Language.PlutusCore</a>                                <a id="3195" class="Symbol">#-}</a>
-<a id="3199" class="Symbol">{-#</a> <a id="3203" class="Keyword">FOREIGN</a> <a id="3211" class="Pragma">GHC</a> <a id="3215" class="Pragma">type</a> <a id="3220" class="Pragma">TypeBuiltin</a> <a id="3232" class="Pragma">=</a> <a id="3234" class="Pragma">Some</a> <a id="3239" class="Pragma">(TypeIn</a> <a id="3247" class="Pragma">DefaultUni)</a>               <a id="3273" class="Symbol">#-}</a>
-<a id="3277" class="Symbol">{-#</a> <a id="3281" class="Keyword">FOREIGN</a> <a id="3289" class="Pragma">GHC</a> <a id="3293" class="Pragma">pattern</a> <a id="3301" class="Pragma">TyInteger</a>    <a id="3314" class="Pragma">=</a> <a id="3316" class="Pragma">Some</a> <a id="3321" class="Pragma">(TypeIn</a> <a id="3329" class="Pragma">DefaultUniInteger)</a>    <a id="3351" class="Symbol">#-}</a>
-<a id="3355" class="Symbol">{-#</a> <a id="3359" class="Keyword">FOREIGN</a> <a id="3367" class="Pragma">GHC</a> <a id="3371" class="Pragma">pattern</a> <a id="3379" class="Pragma">TyByteString</a> <a id="3392" class="Pragma">=</a> <a id="3394" class="Pragma">Some</a> <a id="3399" class="Pragma">(TypeIn</a> <a id="3407" class="Pragma">DefaultUniByteString)</a> <a id="3429" class="Symbol">#-}</a>
-<a id="3433" class="Symbol">{-#</a> <a id="3437" class="Keyword">FOREIGN</a> <a id="3445" class="Pragma">GHC</a> <a id="3449" class="Pragma">pattern</a> <a id="3457" class="Pragma">TyString</a>     <a id="3470" class="Pragma">=</a> <a id="3472" class="Pragma">Some</a> <a id="3477" class="Pragma">(TypeIn</a> <a id="3485" class="Pragma">DefaultUniString)</a>     <a id="3507" class="Symbol">#-}</a>
-<a id="3511" class="Symbol">{-#</a> <a id="3515" class="Keyword">FOREIGN</a> <a id="3523" class="Pragma">GHC</a> <a id="3527" class="Pragma">pattern</a> <a id="3535" class="Pragma">TyChar</a>       <a id="3548" class="Pragma">=</a> <a id="3550" class="Pragma">Some</a> <a id="3555" class="Pragma">(TypeIn</a> <a id="3563" class="Pragma">DefaultUniChar)</a>       <a id="3585" class="Symbol">#-}</a>
-<a id="3589" class="Symbol">{-#</a> <a id="3593" class="Keyword">FOREIGN</a> <a id="3601" class="Pragma">GHC</a> <a id="3605" class="Pragma">pattern</a> <a id="3613" class="Pragma">TyUnit</a>       <a id="3626" class="Pragma">=</a> <a id="3628" class="Pragma">Some</a> <a id="3633" class="Pragma">(TypeIn</a> <a id="3641" class="Pragma">DefaultUniUnit)</a>       <a id="3663" class="Symbol">#-}</a>
-<a id="3667" class="Symbol">{-#</a> <a id="3671" class="Keyword">FOREIGN</a> <a id="3679" class="Pragma">GHC</a> <a id="3683" class="Pragma">pattern</a> <a id="3691" class="Pragma">TyBool</a>       <a id="3704" class="Pragma">=</a> <a id="3706" class="Pragma">Some</a> <a id="3711" class="Pragma">(TypeIn</a> <a id="3719" class="Pragma">DefaultUniBool)</a>       <a id="3741" class="Symbol">#-}</a>
-<a id="3745" class="Symbol">{-#</a> <a id="3749" class="Keyword">COMPILE</a> <a id="3757" class="Keyword">GHC</a> <a id="3761" href="Builtin.Constant.Type.html#2898" class="Datatype">TyCon</a> <a id="3767" class="Pragma">=</a> <a id="3769" class="Pragma">data</a> <a id="3774" class="Pragma">TypeBuiltin</a> <a id="3786" class="Pragma">(TyInteger</a> <a id="3797" class="Pragma">|</a> <a id="3799" class="Pragma">TyByteString</a> <a id="3812" class="Pragma">|</a> <a id="3814" class="Pragma">TyString</a> <a id="3823" class="Pragma">|</a> <a id="3825" class="Pragma">TyChar</a> <a id="3832" class="Pragma">|</a> <a id="3834" class="Pragma">TyUnit</a> <a id="3841" class="Pragma">|</a> <a id="3843" class="Pragma">TyBool)</a> <a id="3851" class="Symbol">#-}</a>
-<a id="3855" class="Markup">\end{code}</a><a id="3865" class="Background">
-</a></pre></body></html>
+</html>

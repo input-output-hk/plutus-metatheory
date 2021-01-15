@@ -1,41 +1,113 @@
-<!DOCTYPE HTML>
-<html><head><meta charset="utf-8"><title>Builtin.Constant.Term</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Markup">\begin{code}</a>
-<a id="14" class="Keyword">open</a> <a id="19" class="Keyword">import</a> <a id="26" href="Builtin.Constant.Type.html" class="Module">Builtin.Constant.Type</a>
-<a id="48" class="Markup">\end{code}</a><a id="58" class="Background">
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Plutus metatheory library | This repository contains a model of Plutus Core (PLC) written in Agda. We prove metatheoretic properties of the model in Agda and test the production PLC implementation against the model in Haskell by compiling the Agda code to Haskell and executing it.</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Plutus metatheory library" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This repository contains a model of Plutus Core (PLC) written in Agda. We prove metatheoretic properties of the model in Agda and test the production PLC implementation against the model in Haskell by compiling the Agda code to Haskell and executing it." />
+<meta property="og:description" content="This repository contains a model of Plutus Core (PLC) written in Agda. We prove metatheoretic properties of the model in Agda and test the production PLC implementation against the model in Haskell by compiling the Agda code to Haskell and executing it." />
+<link rel="canonical" href="/plutus-metatheory/Builtin.Constant.Term.html" />
+<meta property="og:url" content="/plutus-metatheory/Builtin.Constant.Term.html" />
+<meta property="og:site_name" content="Plutus metatheory library" />
+<script type="application/ld+json">
+{"description":"This repository contains a model of Plutus Core (PLC) written in Agda. We prove metatheoretic properties of the model in Agda and test the production PLC implementation against the model in Haskell by compiling the Agda code to Haskell and executing it.","headline":"Plutus metatheory library","@type":"WebPage","url":"/plutus-metatheory/Builtin.Constant.Term.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/plutus-metatheory/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/plutus-metatheory/feed.xml" title="Plutus metatheory library" /></head>
+<body><header class="site-header" role="banner">
 
-</a><a id="60" class="Markup">\begin{code}</a>
-<a id="73" class="Keyword">module</a> <a id="80" href="Builtin.Constant.Term.html" class="Module">Builtin.Constant.Term</a>
-  <a id="104" class="Symbol">(</a><a id="105" href="Builtin.Constant.Term.html#105" class="Bound">Ctx⋆</a> <a id="110" href="Builtin.Constant.Term.html#110" class="Bound">Kind</a> <a id="115" class="Symbol">:</a> <a id="117" class="PrimitiveType">Set</a><a id="120" class="Symbol">)</a>
-  <a id="124" class="Symbol">(</a><a id="125" href="Builtin.Constant.Term.html#125" class="Bound">*</a> <a id="127" class="Symbol">:</a> <a id="129" href="Builtin.Constant.Term.html#110" class="Bound">Kind</a><a id="133" class="Symbol">)</a>
-  <a id="137" class="Symbol">(</a><a id="138" href="Builtin.Constant.Term.html#138" class="Bound Operator">_⊢⋆_</a> <a id="143" class="Symbol">:</a> <a id="145" href="Builtin.Constant.Term.html#105" class="Bound">Ctx⋆</a> <a id="150" class="Symbol">→</a> <a id="152" href="Builtin.Constant.Term.html#110" class="Bound">Kind</a> <a id="157" class="Symbol">→</a> <a id="159" class="PrimitiveType">Set</a><a id="162" class="Symbol">)</a>
-  <a id="166" class="Symbol">(</a><a id="167" href="Builtin.Constant.Term.html#167" class="Bound">con</a> <a id="171" class="Symbol">:</a> <a id="173" class="Symbol">∀{</a><a id="175" href="Builtin.Constant.Term.html#175" class="Bound">φ</a><a id="176" class="Symbol">}</a> <a id="178" class="Symbol">→</a> <a id="180" href="Builtin.Constant.Type.html#2898" class="Datatype">TyCon</a> <a id="186" class="Symbol">→</a> <a id="188" href="Builtin.Constant.Term.html#175" class="Bound">φ</a> <a id="190" href="Builtin.Constant.Term.html#138" class="Bound Operator">⊢⋆</a> <a id="193" href="Builtin.Constant.Term.html#125" class="Bound">*</a><a id="194" class="Symbol">)</a>
-  <a id="198" class="Keyword">where</a>
+  <div class="wrapper"><a class="site-title" rel="author" href="/plutus-metatheory/">Plutus metatheory library</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
 
-<a id="205" class="Keyword">open</a> <a id="210" class="Keyword">import</a> <a id="217" href="Data.Integer.html" class="Module">Data.Integer</a>
-<a id="230" class="Keyword">open</a> <a id="235" class="Keyword">import</a> <a id="242" href="Data.String.html" class="Module">Data.String</a>
-<a id="254" class="Keyword">open</a> <a id="259" class="Keyword">import</a> <a id="266" href="Data.Char.html" class="Module">Data.Char</a>
-<a id="276" class="Keyword">open</a> <a id="281" class="Keyword">import</a> <a id="288" href="Data.Bool.html" class="Module">Data.Bool</a>
-<a id="298" class="Markup">\end{code}</a><a id="308" class="Background">
+        <div class="trigger"><a class="page-link" href="/plutus-metatheory/">Table of Contents</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
 
-## Term Constants
+  <header class="post-header">
+    <link rel="stylesheet" href="/plutus-metatheory/assets/css/Agda.css">
+    <h1 class="post-title"></h1>
+  </header>
 
-</a><a id="329" class="Markup">\begin{code}</a>
-<a id="342" class="Keyword">data</a> <a id="TermCon"></a><a id="347" href="Builtin.Constant.Term.html#347" class="Datatype">TermCon</a> <a id="355" class="Symbol">{</a><a id="356" href="Builtin.Constant.Term.html#356" class="Bound">Φ</a><a id="357" class="Symbol">}</a> <a id="359" class="Symbol">:</a> <a id="361" href="Builtin.Constant.Term.html#356" class="Bound">Φ</a> <a id="363" href="Builtin.Constant.Term.html#138" class="Bound Operator">⊢⋆</a> <a id="366" href="Builtin.Constant.Term.html#125" class="Bound">*</a> <a id="368" class="Symbol">→</a> <a id="370" class="PrimitiveType">Set</a> <a id="374" class="Keyword">where</a>
-  <a id="TermCon.integer"></a><a id="382" href="Builtin.Constant.Term.html#382" class="InductiveConstructor">integer</a>    <a id="393" class="Symbol">:</a>
-      <a id="401" class="Symbol">(</a><a id="402" href="Builtin.Constant.Term.html#402" class="Bound">i</a> <a id="404" class="Symbol">:</a> <a id="406" href="Agda.Builtin.Int.html#246" class="Datatype">ℤ</a><a id="407" class="Symbol">)</a>
-    <a id="413" class="Symbol">→</a> <a id="415" href="Builtin.Constant.Term.html#347" class="Datatype">TermCon</a> <a id="423" class="Symbol">(</a><a id="424" href="Builtin.Constant.Term.html#167" class="Bound">con</a> <a id="428" href="Builtin.Constant.Type.html#2918" class="InductiveConstructor">integer</a><a id="435" class="Symbol">)</a>
-  <a id="TermCon.bytestring"></a><a id="439" href="Builtin.Constant.Term.html#439" class="InductiveConstructor">bytestring</a> <a id="450" class="Symbol">:</a>
-      <a id="458" class="Symbol">(</a><a id="459" href="Builtin.Constant.Term.html#459" class="Bound">b</a> <a id="461" class="Symbol">:</a> <a id="463" href="Builtin.Constant.Type.html#616" class="Postulate">ByteString</a><a id="473" class="Symbol">)</a>
-    <a id="479" class="Symbol">→</a> <a id="481" href="Builtin.Constant.Term.html#347" class="Datatype">TermCon</a> <a id="489" class="Symbol">(</a><a id="490" href="Builtin.Constant.Term.html#167" class="Bound">con</a> <a id="494" href="Builtin.Constant.Type.html#2939" class="InductiveConstructor">bytestring</a><a id="504" class="Symbol">)</a>
-  <a id="TermCon.string"></a><a id="508" href="Builtin.Constant.Term.html#508" class="InductiveConstructor">string</a>     <a id="519" class="Symbol">:</a>
-      <a id="527" class="Symbol">(</a><a id="528" href="Builtin.Constant.Term.html#528" class="Bound">s</a> <a id="530" class="Symbol">:</a> <a id="532" href="Agda.Builtin.String.html#274" class="Postulate">String</a><a id="538" class="Symbol">)</a>
-    <a id="544" class="Symbol">→</a> <a id="546" href="Builtin.Constant.Term.html#347" class="Datatype">TermCon</a> <a id="554" class="Symbol">(</a><a id="555" href="Builtin.Constant.Term.html#167" class="Bound">con</a> <a id="559" href="Builtin.Constant.Type.html#2960" class="InductiveConstructor">string</a><a id="565" class="Symbol">)</a>
-  <a id="TermCon.bool"></a><a id="569" href="Builtin.Constant.Term.html#569" class="InductiveConstructor">bool</a>       <a id="580" class="Symbol">:</a>
-      <a id="588" class="Symbol">(</a><a id="589" href="Builtin.Constant.Term.html#589" class="Bound">b</a> <a id="591" class="Symbol">:</a> <a id="593" href="Agda.Builtin.Bool.html#163" class="Datatype">Bool</a><a id="597" class="Symbol">)</a>
-    <a id="603" class="Symbol">→</a> <a id="605" href="Builtin.Constant.Term.html#347" class="Datatype">TermCon</a> <a id="613" class="Symbol">(</a><a id="614" href="Builtin.Constant.Term.html#167" class="Bound">con</a> <a id="618" href="Builtin.Constant.Type.html#3023" class="InductiveConstructor">bool</a><a id="622" class="Symbol">)</a>
-  <a id="TermCon.char"></a><a id="626" href="Builtin.Constant.Term.html#626" class="InductiveConstructor">char</a>       <a id="637" class="Symbol">:</a>
-      <a id="645" class="Symbol">(</a><a id="646" href="Builtin.Constant.Term.html#646" class="Bound">c</a> <a id="648" class="Symbol">:</a> <a id="650" href="Agda.Builtin.Char.html#227" class="Postulate">Char</a><a id="654" class="Symbol">)</a>
-    <a id="660" class="Symbol">→</a> <a id="662" href="Builtin.Constant.Term.html#347" class="Datatype">TermCon</a> <a id="670" class="Symbol">(</a><a id="671" href="Builtin.Constant.Term.html#167" class="Bound">con</a> <a id="675" href="Builtin.Constant.Type.html#2981" class="InductiveConstructor">char</a><a id="679" class="Symbol">)</a>
-  <a id="TermCon.unit"></a><a id="683" href="Builtin.Constant.Term.html#683" class="InductiveConstructor">unit</a>       <a id="694" class="Symbol">:</a> <a id="696" href="Builtin.Constant.Term.html#347" class="Datatype">TermCon</a> <a id="704" class="Symbol">(</a><a id="705" href="Builtin.Constant.Term.html#167" class="Bound">con</a> <a id="709" href="Builtin.Constant.Type.html#3002" class="InductiveConstructor">unit</a><a id="713" class="Symbol">)</a>
-<a id="715" class="Markup">\end{code}</a><a id="725" class="Background">
-</a></pre></body></html>
+  <div class="post-content">
+    <pre class="Agda"><a id="5" class="Keyword">open</a> <a id="10" class="Keyword">import</a> <a id="17" href="Builtin.Constant.Type.html" class="Module">Builtin.Constant.Type</a>
+</pre>
+<pre class="Agda"><a id="48" class="Keyword">module</a> <a id="55" href="Builtin.Constant.Term.html" class="Module">Builtin.Constant.Term</a>
+  <a id="79" class="Symbol">(</a><a id="80" href="Builtin.Constant.Term.html#80" class="Bound">Ctx⋆</a> <a id="85" href="Builtin.Constant.Term.html#85" class="Bound">Kind</a> <a id="90" class="Symbol">:</a> <a id="92" class="PrimitiveType">Set</a><a id="95" class="Symbol">)</a>
+  <a id="99" class="Symbol">(</a><a id="100" href="Builtin.Constant.Term.html#100" class="Bound">*</a> <a id="102" class="Symbol">:</a> <a id="104" href="Builtin.Constant.Term.html#85" class="Bound">Kind</a><a id="108" class="Symbol">)</a>
+  <a id="112" class="Symbol">(</a><a id="113" href="Builtin.Constant.Term.html#113" class="Bound Operator">_⊢⋆_</a> <a id="118" class="Symbol">:</a> <a id="120" href="Builtin.Constant.Term.html#80" class="Bound">Ctx⋆</a> <a id="125" class="Symbol">→</a> <a id="127" href="Builtin.Constant.Term.html#85" class="Bound">Kind</a> <a id="132" class="Symbol">→</a> <a id="134" class="PrimitiveType">Set</a><a id="137" class="Symbol">)</a>
+  <a id="141" class="Symbol">(</a><a id="142" href="Builtin.Constant.Term.html#142" class="Bound">con</a> <a id="146" class="Symbol">:</a> <a id="148" class="Symbol">∀{</a><a id="150" href="Builtin.Constant.Term.html#150" class="Bound">φ</a><a id="151" class="Symbol">}</a> <a id="153" class="Symbol">→</a> <a id="155" href="Builtin.Constant.Type.html#1052" class="Datatype">TyCon</a> <a id="161" class="Symbol">→</a> <a id="163" href="Builtin.Constant.Term.html#150" class="Bound">φ</a> <a id="165" href="Builtin.Constant.Term.html#113" class="Bound Operator">⊢⋆</a> <a id="168" href="Builtin.Constant.Term.html#100" class="Bound">*</a><a id="169" class="Symbol">)</a>
+  <a id="173" class="Keyword">where</a>
+
+<a id="180" class="Keyword">open</a> <a id="185" class="Keyword">import</a> <a id="192" href="Builtin.html" class="Module">Builtin</a>
+
+<a id="201" class="Keyword">open</a> <a id="206" class="Keyword">import</a> <a id="213" href="Data.Integer.html" class="Module">Data.Integer</a>
+<a id="226" class="Keyword">open</a> <a id="231" class="Keyword">import</a> <a id="238" href="Data.String.html" class="Module">Data.String</a>
+<a id="250" class="Keyword">open</a> <a id="255" class="Keyword">import</a> <a id="262" href="Data.Char.html" class="Module">Data.Char</a>
+<a id="272" class="Keyword">open</a> <a id="277" class="Keyword">import</a> <a id="284" href="Data.Bool.html" class="Module">Data.Bool</a>
+</pre>
+<h2 id="term-constants">Term Constants</h2>
+
+<pre class="Agda"><a id="322" class="Keyword">data</a> <a id="TermCon"></a><a id="327" href="Builtin.Constant.Term.html#327" class="Datatype">TermCon</a> <a id="335" class="Symbol">{</a><a id="336" href="Builtin.Constant.Term.html#336" class="Bound">Φ</a><a id="337" class="Symbol">}</a> <a id="339" class="Symbol">:</a> <a id="341" href="Builtin.Constant.Term.html#336" class="Bound">Φ</a> <a id="343" href="Builtin.Constant.Term.html#113" class="Bound Operator">⊢⋆</a> <a id="346" href="Builtin.Constant.Term.html#100" class="Bound">*</a> <a id="348" class="Symbol">→</a> <a id="350" class="PrimitiveType">Set</a> <a id="354" class="Keyword">where</a>
+  <a id="TermCon.integer"></a><a id="362" href="Builtin.Constant.Term.html#362" class="InductiveConstructor">integer</a>    <a id="373" class="Symbol">:</a>
+      <a id="381" class="Symbol">(</a><a id="382" href="Builtin.Constant.Term.html#382" class="Bound">i</a> <a id="384" class="Symbol">:</a> <a id="386" href="Agda.Builtin.Int.html#246" class="Datatype">ℤ</a><a id="387" class="Symbol">)</a>
+    <a id="393" class="Symbol">→</a> <a id="395" href="Builtin.Constant.Term.html#327" class="Datatype">TermCon</a> <a id="403" class="Symbol">(</a><a id="404" href="Builtin.Constant.Term.html#142" class="Bound">con</a> <a id="408" href="Builtin.Constant.Type.html#1072" class="InductiveConstructor">integer</a><a id="415" class="Symbol">)</a>
+  <a id="TermCon.bytestring"></a><a id="419" href="Builtin.Constant.Term.html#419" class="InductiveConstructor">bytestring</a> <a id="430" class="Symbol">:</a>
+      <a id="438" class="Symbol">(</a><a id="439" href="Builtin.Constant.Term.html#439" class="Bound">b</a> <a id="441" class="Symbol">:</a> <a id="443" href="Builtin.html#2558" class="Postulate">ByteString</a><a id="453" class="Symbol">)</a>
+    <a id="459" class="Symbol">→</a> <a id="461" href="Builtin.Constant.Term.html#327" class="Datatype">TermCon</a> <a id="469" class="Symbol">(</a><a id="470" href="Builtin.Constant.Term.html#142" class="Bound">con</a> <a id="474" href="Builtin.Constant.Type.html#1093" class="InductiveConstructor">bytestring</a><a id="484" class="Symbol">)</a>
+  <a id="TermCon.string"></a><a id="488" href="Builtin.Constant.Term.html#488" class="InductiveConstructor">string</a>     <a id="499" class="Symbol">:</a>
+      <a id="507" class="Symbol">(</a><a id="508" href="Builtin.Constant.Term.html#508" class="Bound">s</a> <a id="510" class="Symbol">:</a> <a id="512" href="Agda.Builtin.String.html#274" class="Postulate">String</a><a id="518" class="Symbol">)</a>
+    <a id="524" class="Symbol">→</a> <a id="526" href="Builtin.Constant.Term.html#327" class="Datatype">TermCon</a> <a id="534" class="Symbol">(</a><a id="535" href="Builtin.Constant.Term.html#142" class="Bound">con</a> <a id="539" href="Builtin.Constant.Type.html#1114" class="InductiveConstructor">string</a><a id="545" class="Symbol">)</a>
+  <a id="TermCon.bool"></a><a id="549" href="Builtin.Constant.Term.html#549" class="InductiveConstructor">bool</a>       <a id="560" class="Symbol">:</a>
+      <a id="568" class="Symbol">(</a><a id="569" href="Builtin.Constant.Term.html#569" class="Bound">b</a> <a id="571" class="Symbol">:</a> <a id="573" href="Agda.Builtin.Bool.html#163" class="Datatype">Bool</a><a id="577" class="Symbol">)</a>
+    <a id="583" class="Symbol">→</a> <a id="585" href="Builtin.Constant.Term.html#327" class="Datatype">TermCon</a> <a id="593" class="Symbol">(</a><a id="594" href="Builtin.Constant.Term.html#142" class="Bound">con</a> <a id="598" href="Builtin.Constant.Type.html#1177" class="InductiveConstructor">bool</a><a id="602" class="Symbol">)</a>
+  <a id="TermCon.char"></a><a id="606" href="Builtin.Constant.Term.html#606" class="InductiveConstructor">char</a>       <a id="617" class="Symbol">:</a>
+      <a id="625" class="Symbol">(</a><a id="626" href="Builtin.Constant.Term.html#626" class="Bound">c</a> <a id="628" class="Symbol">:</a> <a id="630" href="Agda.Builtin.Char.html#227" class="Postulate">Char</a><a id="634" class="Symbol">)</a>
+    <a id="640" class="Symbol">→</a> <a id="642" href="Builtin.Constant.Term.html#327" class="Datatype">TermCon</a> <a id="650" class="Symbol">(</a><a id="651" href="Builtin.Constant.Term.html#142" class="Bound">con</a> <a id="655" href="Builtin.Constant.Type.html#1135" class="InductiveConstructor">char</a><a id="659" class="Symbol">)</a>
+  <a id="TermCon.unit"></a><a id="663" href="Builtin.Constant.Term.html#663" class="InductiveConstructor">unit</a>       <a id="674" class="Symbol">:</a> <a id="676" href="Builtin.Constant.Term.html#327" class="Datatype">TermCon</a> <a id="684" class="Symbol">(</a><a id="685" href="Builtin.Constant.Term.html#142" class="Bound">con</a> <a id="689" href="Builtin.Constant.Type.html#1156" class="InductiveConstructor">unit</a><a id="693" class="Symbol">)</a>
+</pre>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/plutus-metatheory/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Plutus metatheory library</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Plutus metatheory library</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/input-output-hk"><svg class="svg-icon"><use xlink:href="/plutus-metatheory/assets/minima-social-icons.svg#github"></use></svg> <span class="username">input-output-hk</span></a></li><li><a href="https://www.twitter.com/InputOutputHK"><svg class="svg-icon"><use xlink:href="/plutus-metatheory/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">InputOutputHK</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>
+This repository contains a model of Plutus Core (PLC) written in Agda. We prove metatheoretic properties of the model in Agda and test the production PLC implementation against the model in Haskell by compiling the Agda code to Haskell and executing it.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
