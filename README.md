@@ -2,7 +2,7 @@
 
 It has been ASSIMILATED into the main [plutus
 repository](https://github.com/input-output-hk/plutus) where it lives
-in the [metatheory folder](https://github.com/input-output-hk/plutus/tree/master/metatheory).
+in the [metatheory folder](https://github.com/input-output-hk/plutus/tree/master/plutus-metatheory).
 
 This version will not be updated.
 
